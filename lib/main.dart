@@ -1,17 +1,36 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
+import 'package:start_app/model/cart_model.dart';
+import 'package:start_app/page/home_page.dart';
 
-import 'MyView.dart';
+void main() => runApp(new CartApp());
 
-//void main() => runApp(new MyApp());
-
-void main() {
-  runApp(new MaterialApp(
-    title: 'My app', // used by the OS task switcher
-    home: new MyScaffold(),
-  ));
+class CartApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => Cart(),
+      child: MaterialApp(
+        title: 'Flutter Food',
+        showSemanticsDebugger: false,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: HomePage(),
+      ),
+    );
+  }
 }
+
+//void main() {
+//  runApp(new MaterialApp(
+//    title: 'My app', // used by the OS task switcher
+//    home: new MyApp(),
+//  ));
+//}
 
 class MyApp extends StatelessWidget {
   @override
@@ -57,6 +76,11 @@ class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
   final _saved = new Set<WordPair>();
+
+  Future<File> _getLocalFiel() async {
+    File file = await _getLocalFiel();
+    String contents = await file.readAsString();
+  }
 
   @override
   Widget build(BuildContext context) {
