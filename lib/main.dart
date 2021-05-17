@@ -4,6 +4,8 @@ import 'package:english_words/english_words.dart';
 import 'package:provider/provider.dart';
 import 'package:start_app/model/cart_model.dart';
 import 'package:start_app/page/home_page.dart';
+import 'package:start_app/route/custom_scroll_view_route.dart';
+import 'package:start_app/view/scaffold_route.dart';
 
 void main() => runApp(new CartApp());
 
@@ -19,7 +21,7 @@ class CartApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomePage(),
+        home: CustomScrollViewRoute(),
       ),
     );
   }
