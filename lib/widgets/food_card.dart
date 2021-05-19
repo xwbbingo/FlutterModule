@@ -132,6 +132,7 @@ class _FoodCardState extends State<FoodCard> {
     );
     Scaffold.of(context).showSnackBar(snackBar);
     CartModel cartModel = CartModel(food: food, quantity: 1);
+    // listen 设为false，不建立依赖关系
     Provider.of<Cart>(context, listen: false).addItem(cartModel);
   }
 }

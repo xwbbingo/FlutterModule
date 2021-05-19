@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:start_app/main.dart';
+import 'package:start_app/models/index.dart';
 
 void main() {
 //  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
@@ -33,6 +34,8 @@ void main() {
   print(greetBob(Impostor()));
   assert('STRUCTURED WEB APPS'.toLowerCase() ==
       'structured web apps');
+  var u =  User.fromJson({"name": "Jack", "age": 16});
+  print(u.name);
 }
 
 // person 类。 隐式接口里面包含了 greet() 方法声明。

@@ -21,7 +21,7 @@ class CartApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: CustomScrollViewRoute(),
+        home: HomePage(),
       ),
     );
   }
