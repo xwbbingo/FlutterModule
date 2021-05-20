@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:start_app/constants/colors.dart';
+import 'file:///E:/FlutterProject/start_app/lib/res/colors.dart';
 import 'package:start_app/model/cart_model.dart';
 import 'package:start_app/model/food_model.dart';
 import 'package:start_app/widgets/cart_bottom_sheet.dart';

@@ -35,17 +35,50 @@ dependencies:
   flutter_rating_bar: ^2.0.0+2
   #国际化包
   intl: ^0.15.8
-  json_annotation: ^2.0.0
+  #国际化工具 arb文件
+  intl_translation: ^0.17.2
+  #json转model
+  json_to_model: ^1.4.0
+  #apn_json2model: ^1.0.0
+  build_runner: ^1.9.0
+  json_serializable: ^3.3.0
+  json_annotation: ^3.0.1
+
+
+  ########### 网络相关 ###########
+  #网络请求 https://github.com/flutterchina/dio
+  dio: ^3.0.10
+  #cookie管理 https://github.com/flutterchina/dio/tree/master/plugins/cookie_manager
+  dio_cookie_manager: 1.0.0
+
+  #路由工具
+  #fluro: ^2.0.3
+  #接口服务封装工具  https://github.com/trevorwang/retrofit.dart
+  #retrofit: any
+  #日志打印
+  #logger: any
+
+  ########### UI相关 ###########
+
+
+  ########### 工具相关 ###########
+  #吐司 https://github.com/PonnamKarthik/FlutterToast
+  fluttertoast: ^8.0.7
+
+  ########### 其它相关 ###########
+  #数据存储
+  shared_preferences: ^2.0.5
+  #存储路径
+  path_provider: ^2.0.0
+
+
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  json_model: ^0.0.2
-  build_runner: ^1.0.0
-  json_serializable: ^2.0.0
-  #国际化工具 arb文件
-  intl_translation: ^0.17.2
+  #retrofit_generator: any
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
