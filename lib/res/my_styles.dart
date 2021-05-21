@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:start_app/res/dimens.dart';
+import 'package:start_app/res/my_dimens.dart';
 import 'package:start_app/utils/theme_util.dart';
+
+import 'my_colors.dart';
 
 class Decorations {
   static Decoration bottom = new BoxDecoration(
@@ -25,3 +27,11 @@ class Gaps {
   static Widget vGap10 = new SizedBox(height: MyDimens.gap_dp10);
   static Widget vGap15 = new SizedBox(height: MyDimens.gap_dp15);
 }
+
+var roundedRectangle12 = RoundedRectangleBorder(
+  borderRadius: BorderRadiusDirectional.circular(12),
+);
+
+var roundedRectangle32 = RoundedRectangleBorder(
+  borderRadius: BorderRadiusDirectional.circular(32),
+);

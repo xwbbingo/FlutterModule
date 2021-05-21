@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'file:///E:/FlutterProject/start_app/lib/res/colors.dart';
 import 'package:start_app/model/cart_model.dart';
 import 'package:start_app/model/food_model.dart';
+import 'package:start_app/res/my_colors.dart';
+import 'package:start_app/res/my_styles.dart';
 import 'package:start_app/widgets/cart_bottom_sheet.dart';
 import 'package:start_app/widgets/food_card.dart';
 
