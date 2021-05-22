@@ -52,6 +52,7 @@ class _MainScreenState extends State<MainScreen> {
             itemBuilder: (context, index) => pages[index],
             itemCount: pages.length,
             controller: pageController,
+            //不允许用户滚动,切换页面
             physics: NeverScrollableScrollPhysics(),
             onPageChanged: (index) {
               setState(() {
