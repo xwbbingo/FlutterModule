@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'file:///E:/FlutterProject/start_app/lib/res/colors.dart';
 import 'package:start_app/model/cart_model.dart';
 import 'package:start_app/model/food_model.dart';
+import 'package:start_app/res/colors.dart';
 
 class CheckOutPage extends StatefulWidget {
   _CheckOutPageState createState() => _CheckOutPageState();

@@ -35,7 +35,6 @@ class DioManager {
     Directory tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path + "/dioCookie";
     print('DioUtil : http cookie path = $tempPath');
-    CookieManager
   }
 
   /// 定义一个命名参数的方法
