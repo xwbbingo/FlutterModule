@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:start_app/common/common.dart';
+import 'package:start_app/utils/print_util.dart';
 
 ///  Dio 请求日志拦截器
 class MyLogInterceptor extends InterceptorsWrapper {
@@ -34,21 +35,35 @@ class MyLogInterceptor extends InterceptorsWrapper {
   onResponse(Response response) async {
     if (isDebug) {
       print('┌─────────────────────Begin Response—————————————————————');
-      printKV('uri', response.request.uri);
+      //printKV('uri', response.request.uri);
       printKV('status', response.statusCode);
-      printKV('responseType', response.request.responseType.toString());
+      //printKV('responseType', response.request.responseType.toString());
 
       StringBuffer stringBuffer = new StringBuffer();
       response.headers.forEach((key, v) => stringBuffer.write('\n  $key: $v'));
-      printKV('headers', stringBuffer.toString());
+      //printKV('headers', stringBuffer.toString());
       stringBuffer.clear();
 
-      // printLong('response: ' + response.toString());
+      printLong('response: ' + response.toString());
 
       print('└—————————————————————End Response———————————————————————\n\n');
     }
     return response;
   }
 
-  void printKV(String k, Object v) {}
+  @override
+  onError(DioError err) async {
+    if (isDebug) {
+      print('┌─────────────────────Begin Dio Error—————————————————————');
+      printKV('error', err.toString());
+      printKV('error message', (err.response?.toString() ?? ''));
+      print('└—————————————————————End Dio Error———————————————————————\n\n');
+    }
+    return err;
+  }
+
+
+  void printKV(String key, Object value) {
+    printLong('$key: $value');
+  }
 }

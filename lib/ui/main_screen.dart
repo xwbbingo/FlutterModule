@@ -10,7 +10,8 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen>
+    with AutomaticKeepAliveClientMixin {
   PageController pageController = PageController();
 
   /// tabs的名字
@@ -29,8 +30,13 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   DateTime _lastPressedAt; //上次点击时间
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     //返回键控制退出
     return WillPopScope(
         child: Scaffold(

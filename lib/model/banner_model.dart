@@ -39,13 +39,13 @@ class BannerBean {
 
   BannerBean(
       {this.desc,
-      this.id,
-      this.imagePath,
-      this.isVisible,
-      this.order,
-      this.title,
-      this.type,
-      this.url});
+        this.id,
+        this.imagePath,
+        this.isVisible,
+        this.order,
+        this.title,
+        this.type,
+        this.url});
 
   BannerBean.fromJson(Map<String, dynamic> json) {
     desc = json['desc'];
