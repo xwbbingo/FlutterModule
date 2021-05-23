@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:start_app/res/colors.dart';
+import 'package:start_app/res/my_colors.dart';
 
 /// Toast 简单封装
 class ToastUtil {

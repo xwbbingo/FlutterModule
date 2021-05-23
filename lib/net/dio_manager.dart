@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -35,6 +36,8 @@ class DioManager {
     Directory tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path + "/dioCookie";
     print('DioUtil : http cookie path = $tempPath');
+    CookieJar cj = PersistCookieJar(dir: tempPath, ignoreExpires: true);
+    dio.interceptors.add(CookieManager(cj));
   }
 
   /// 定义一个命名参数的方法

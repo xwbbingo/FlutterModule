@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'file:///E:/FlutterProject/start_app/lib/res/my_colors.dart';
 import 'package:start_app/model/cart_model.dart';
 import 'package:start_app/page/checkout_page.dart';
-import 'package:start_app/res/colors.dart';
 
 class CartBottomSheet extends StatelessWidget {
   final titleStyle = TextStyle(fontSize: 22, fontWeight: FontWeight.bold);

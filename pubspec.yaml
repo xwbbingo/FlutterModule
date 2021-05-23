@@ -50,6 +50,8 @@ dependencies:
   dio: ^3.0.10
   #cookie管理 https://github.com/flutterchina/dio/tree/master/plugins/cookie_manager
   dio_cookie_manager: 1.0.0
+  #dio_cookie_manager需要此依赖 https://github.com/flutterchina/cookie_jar
+  cookie_jar: ^1.0.1
 
   #路由工具
   #fluro: ^2.0.3
@@ -95,6 +97,11 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  # 加载页面图片资源
+  assets:
+    - assets/images/
+    - assets/images/2.0x/
+    - assets/images/3.0x/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
