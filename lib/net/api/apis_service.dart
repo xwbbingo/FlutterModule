@@ -32,4 +32,23 @@ class ApisService {
       errorCallback(e);
     });
   }
+
+  /// 获取广场列表数据
+  void getSquareList(
+      Function callback, Function errorCallback, int _page) async {
+    dio.get(Apis.SQUARE_LIST + "/$_page/json").then((response) {
+      callback(ArticleModel.fromJson(response.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 获取公众号名称
+  void getWXChaptersList(Function callback, Function errorCallback) async {
+    dio.get(Apis.WX_CHAPTERS_LIST).then((response) {
+      callback(WXChaptersModel.fromJson(response.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
 }

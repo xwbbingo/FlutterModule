@@ -10,6 +10,7 @@ import 'package:start_app/net/api/apis_service.dart';
 import 'package:start_app/ui/base_widget.dart';
 import 'package:start_app/utils/toast_util.dart';
 import 'package:start_app/widgets/custom_cached_image.dart';
+import 'package:start_app/widgets/custom_load_footer.dart';
 import 'package:start_app/widgets/item_article_list.dart';
 
 ///首页
@@ -56,9 +57,7 @@ class _HomeScreenState extends BaseWidgetState<HomeScreen> {
     });
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
-
-      }
+          scrollController.position.maxScrollExtent) {}
       if (scrollController.offset < 200 && isShowFab) {
         setState(() {
           isShowFab = false;
@@ -85,33 +84,7 @@ class _HomeScreenState extends BaseWidgetState<HomeScreen> {
         enablePullUp: true,
         enablePullDown: true,
         header: MaterialClassicHeader(),
-        footer: CustomFooter(
-          builder: (BuildContext context, LoadStatus mode) {
-            Widget body;
-            if (mode == LoadStatus.idle) {
-              body = Text("上拉加载更多~");
-            } else if (mode == LoadStatus.loading) {
-//              body =  CupertinoActivityIndicator();
-              body = Wrap(
-                spacing: 6,
-                children: <Widget>[
-                  CupertinoActivityIndicator(),
-                  Text("加载中..."),
-                ],
-              );
-            } else if (mode == LoadStatus.failed) {
-              body = Text("加载失败！点击重试！");
-            } else if (mode == LoadStatus.canLoading) {
-              body = Text("松手,加载更多!");
-            } else {
-              body = Text("没有更多数据了!");
-            }
-            return Container(
-              height: 55.0,
-              child: Center(child: body),
-            );
-          },
-        ),
+        footer: CustomLoadFooter(),
         controller: refreshController,
         onRefresh: getTopArticleList,
         onLoading: getMoreArticleList,
