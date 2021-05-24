@@ -11,6 +11,10 @@ import 'package:start_app/utils/theme_util.dart';
 import 'widgets/random_words.dart';
 
 void main() async {
+  /// 修改问题: Unhandled Exception: ServicesBinding.defaultBinaryMessenger was accessed before the binding was initialized
+  /// https://stackoverflow.com/questions/57689492/flutter-unhandled-exception-servicesbinding-defaultbinarymessenger-was-accesse
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(WanAndroidApp());
 }
 

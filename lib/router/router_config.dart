@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_app/ui/splash_screen.dart';
+import 'package:start_app/ui/ui_index.dart';
 
 /// 存放路由的配置
 class RouterName {
@@ -23,6 +23,7 @@ class Router {
   static Map<String, WidgetBuilder> generateRoute() {
     Map<String, WidgetBuilder> routes = {
       RouterName.splash: (context) => SplashScreen(),
+      RouterName.home: (context) => HomeScreen(),
     };
     return routes;
   }

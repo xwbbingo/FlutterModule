@@ -1,12 +1,16 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:start_app/common/common.dart';
 import 'package:start_app/model/article_model.dart';
 import 'package:start_app/model/model_index.dart';
 import 'package:start_app/net/api/apis_service.dart';
 import 'package:start_app/ui/base_widget.dart';
+import 'package:start_app/utils/toast_util.dart';
 import 'package:start_app/widgets/custom_cached_image.dart';
+import 'package:start_app/widgets/item_article_list.dart';
 
 ///首页
 class HomeScreen extends BaseWidget {
@@ -46,10 +50,25 @@ class _HomeScreenState extends BaseWidgetState<HomeScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     bannerList.add(null);
-//    showLoading().then((value) {
-//
-//    });
-    getBannerList();
+    showLoading().then((value) {
+      getBannerList();
+      getTopArticleList();
+    });
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+
+      }
+      if (scrollController.offset < 200 && isShowFab) {
+        setState(() {
+          isShowFab = false;
+        });
+      } else if (scrollController.offset >= 200 && !isShowFab) {
+        setState(() {
+          isShowFab = true;
+        });
+      }
+    });
   }
 
   @override
@@ -63,7 +82,7 @@ class _HomeScreenState extends BaseWidgetState<HomeScreen> {
   Widget attachContentWidget(BuildContext context) {
     return Scaffold(
       body: SmartRefresher(
-        enablePullUp: false,
+        enablePullUp: true,
         enablePullDown: true,
         header: MaterialClassicHeader(),
         footer: CustomFooter(
@@ -94,15 +113,25 @@ class _HomeScreenState extends BaseWidgetState<HomeScreen> {
           },
         ),
         controller: refreshController,
-        onRefresh: null,
-        onLoading: null,
+        onRefresh: getTopArticleList,
+        onLoading: getMoreArticleList,
         child: ListView.builder(
           itemBuilder: buildItemView,
           physics: AlwaysScrollableScrollPhysics(),
           controller: scrollController,
-          itemCount: 1,
+          itemCount: articleList.length + 1,
         ),
       ),
+      floatingActionButton: !isShowFab
+          ? null
+          : FloatingActionButton(
+              heroTag: "home",
+              child: Icon(Icons.arrow_upward),
+              onPressed: () {
+                //回到顶部时执行的动画
+                scrollController.animateTo(0,
+                    duration: Duration(milliseconds: 2000), curve: Curves.ease);
+              }),
     );
   }
 
@@ -110,6 +139,7 @@ class _HomeScreenState extends BaseWidgetState<HomeScreen> {
   void onClickErrorWidget() {
     showLoading().then((value) {
       getBannerList();
+      getTopArticleList();
     });
   }
 
@@ -117,13 +147,74 @@ class _HomeScreenState extends BaseWidgetState<HomeScreen> {
   Future getBannerList() async {
     apisService.getBannerList((BannerModel bannerModel) {
       if (bannerModel.data.length > 0) {
-        showContent().then((value) =>
-            refreshController.refreshCompleted(resetFooterState: true));
         setState(() {
           bannerList = bannerModel.data;
         });
       }
     });
+  }
+
+  /// 获取置顶文章数据
+  Future getTopArticleList() async {
+    apisService.getTopArticleList((TopArticleModel topArticleModel) {
+      if (topArticleModel.errorCode == Constants.STATUS_SUCCESS) {
+        topArticleModel.data.forEach((element) {
+          element.top = 1;
+        });
+        articleList.clear();
+        articleList.addAll(topArticleModel.data);
+      }
+      // 获取文章列表
+      getArticleList();
+    }, (DioError dioError) {
+      showError();
+    });
+  }
+
+  /// 获取文章列表数据
+  Future getArticleList() async {
+    page = 0;
+    apisService.getArticleList((ArticleModel articleModel) {
+      if (articleModel.errorCode == Constants.STATUS_SUCCESS) {
+        if (articleModel.data.datas.length > 0) {
+          showContent().then((value) {
+            refreshController.refreshCompleted(resetFooterState: true);
+            setState(() {
+              articleList.addAll(articleModel.data.datas);
+            });
+          });
+        } else {
+          showEmpty();
+        }
+      } else {
+        showError();
+        ToastUtil.show(msg: articleModel.errorMsg);
+      }
+    }, (DioError dioError) {
+      showError();
+    }, page);
+  }
+
+  /// 获取更多文章列表数据
+  Future getMoreArticleList() async {
+    page++;
+    apisService.getArticleList((ArticleModel articleModel) {
+      if (articleModel.errorCode == Constants.STATUS_SUCCESS) {
+        if (articleModel.data.datas.length > 0) {
+          refreshController.loadComplete();
+          setState(() {
+            articleList.addAll(articleModel.data.datas);
+          });
+        } else {
+          refreshController.loadNoData();
+        }
+      } else {
+        refreshController.loadFailed();
+        ToastUtil.show(msg: articleModel.errorMsg);
+      }
+    }, (DioError dioError) {
+      refreshController.loadFailed();
+    }, page);
   }
 
   Widget buildItemView(BuildContext context, int index) {
@@ -134,6 +225,8 @@ class _HomeScreenState extends BaseWidgetState<HomeScreen> {
         child: buildBannerWidget(),
       );
     }
+    ArticleBean item = articleList[index - 1];
+    return ItemArticleList(item: item);
   }
 
   /// 构建轮播视图
