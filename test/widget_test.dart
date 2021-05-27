@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:start_app/main.dart';
+import 'package:start_app/main/wanandroid_main.dart';
 
 
 void main() {
@@ -30,8 +31,7 @@ void main() {
   });
   print(greetBob(Person('Kathy')));
   print(greetBob(Impostor()));
-  assert('STRUCTURED WEB APPS'.toLowerCase() ==
-      'structured web apps');
+  assert('STRUCTURED WEB APPS'.toLowerCase() == 'structured web apps');
 //  var u =  User.fromJson({"name": "Jack", "age": 16});
 //  print(u.name);
 }
@@ -58,4 +58,3 @@ class Impostor implements Person {
 String greetBob(Person person) => person.greet('Bob');
 
 typedef Predicate<E> = bool Function(E element);
-

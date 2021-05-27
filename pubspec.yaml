@@ -31,6 +31,12 @@ dependencies:
   english_words: ^3.1.0
   #状态变化
   provider: ^5.0.0
+  # 将展示层的代码与业务逻辑分开，从而使您的代码快速，易于测试且可重复使用
+  # https://github.com/felangel/bloc/tree/master/packages/bloc
+  bloc: ^7.0.0
+  # 强大的Flutter Widgets可与bloc配合使用，以构建快速，反应灵活的移动端应用程序
+  # https://github.com/felangel/bloc/tree/master/packages/flutter_bloc
+  flutter_bloc: ^7.0.0
   #评价评分
   flutter_rating_bar: ^2.0.0+2
   #国际化包
@@ -64,10 +70,12 @@ dependencies:
   cached_network_image: ^2.0.0
 
   ########### UI相关 ###########
-  #下拉刷新，上拉加载  https://github.com/peng8350/flutter_pulltorefresh
+  # 下拉刷新，上拉加载  https://github.com/peng8350/flutter_pulltorefresh
   pull_to_refresh: ^2.0.0
   # 轮播图 https://github.com/best-flutter/flutter_swiper
   flutter_swiper: ^1.1.6
+  # 丰富的加载Loading样式 https://github.com/jogboms/flutter_spinkit
+  flutter_spinkit: ^5.0.0
 
   ########### 工具相关 ###########
   #吐司 https://github.com/PonnamKarthik/FlutterToast
