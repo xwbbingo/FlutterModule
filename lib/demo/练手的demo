@@ -1,0 +1,18 @@
+基于bloc框架，相应的练习
+1. flutter_weather
+github:
+api： https://www.metaweather.com/api/
+接口1：
+Location Search
+URL
+/api/location/search/?query=(query) /api/location/search/?lattlong=(latt),(long)
+
+接口2
+Location
+URL
+/api/location/(woeid)/
+
+接口3
+Location Day
+URL
+/api/location/(woeid)/(date)/

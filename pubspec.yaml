@@ -29,6 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   english_words: ^3.1.0
+
   #状态变化
   provider: ^5.0.0
   # 将展示层的代码与业务逻辑分开，从而使您的代码快速，易于测试且可重复使用
@@ -43,15 +44,10 @@ dependencies:
   intl: ^0.15.8
   #国际化工具 arb文件
   intl_translation: ^0.17.2
-  #json转model
-  #json_to_model: ^1.4.0
-  #apn_json2model: ^1.0.0
-  build_runner: ^1.9.0
-  json_serializable: ^3.3.0
-  json_annotation: ^3.0.1
-
 
   ########### 网络相关 ###########
+  #网络请求 https://github.com/dart-lang/http
+  http: ^0.12.0
   #网络请求 https://github.com/flutterchina/dio
   dio: ^3.0.10
   #cookie管理 https://github.com/flutterchina/dio/tree/master/plugins/cookie_manager
@@ -86,19 +82,26 @@ dependencies:
   shared_preferences: ^2.0.5
   #存储路径
   path_provider: ^2.0.0
+  #json转model
+  #json_to_model: ^1.4.0
+  #apn_json2model: ^1.0.0
+  json_annotation: ^3.0.1
+
   # WebView插件 https://pub.flutter-io.cn/packages/flutter_webview_plugin
   flutter_webview_plugin: ^0.3.11
   # 启动URL的插件 https://github.com/flutter/plugins/tree/master/packages/url_launcher
   url_launcher: 6.0.3
 
-
+  # 不必overrides == and hashCode，节省时间
+  equatable: ^2.0.2
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   #retrofit_generator: any
-
+  build_runner: ^1.9.0
+  json_serializable: ^3.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
