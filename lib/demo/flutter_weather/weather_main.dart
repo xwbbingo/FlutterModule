@@ -12,7 +12,7 @@ import 'package:start_app/demo/flutter_weather/widgets/weather.dart';
 
 void main() {
   Bloc.observer = WeatherBlocObserver();
-  //初始化client
+  //初始化api
   final WeatherRepository weatherRepository = WeatherRepository(
     weatherApiClient: WeatherApiClient(
       httpClient: http.Client(),

@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:start_app/demo/flutter_weather/models/weather.dart';
 import 'package:start_app/demo/flutter_weather/repositories/weather_repository.dart';
 
+///发送事件，接口请求需要的参数
 abstract class WeatherEvent extends Equatable {
   const WeatherEvent();
 }
@@ -28,6 +29,7 @@ class WeatherRefreshRequested extends WeatherEvent {
   List<Object> get props => [city];
 }
 
+///回调接口请求后得到的数据，及各种状态
 abstract class WeatherState extends Equatable {
   const WeatherState();
 
@@ -50,6 +52,7 @@ class WeatherLoadSuccess extends WeatherState {
 
 class WeatherLoadFailure extends WeatherState {}
 
+///事件及回调的中间件
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final WeatherRepository weatherRepository;
 
@@ -57,6 +60,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       : assert(weatherRepository != null),
         super(WeatherInitial());
 
+  ///匹配到相应的事件，通过接口去获取数据
   @override
   Stream<WeatherState> mapEventToState(WeatherEvent event) async* {
     if (event is WeatherRequested) {
