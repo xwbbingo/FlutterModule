@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -89,5 +90,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       final Weather weather = await weatherRepository.getWeather(event.city);
       yield WeatherLoadSuccess(weather: weather);
     } catch (_) {}
+  }
+
+  sayHello() {
+    sleep(Duration(seconds: 10));
+    print("11111");
+    //sleep(Duration(seconds: 2));
+    print("222222");
   }
 }

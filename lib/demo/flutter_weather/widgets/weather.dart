@@ -85,6 +85,7 @@ class _WeatherState extends State<Weather> {
                         BlocProvider.of<WeatherBloc>(context).add(
                           WeatherRefreshRequested(city: weather.location),
                         );
+                        //BlocProvider.of<WeatherBloc>(context).sayHello();
                         return _refreshCompleter.future;
                       },
                       child: ListView(

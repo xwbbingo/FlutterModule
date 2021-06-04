@@ -47,6 +47,9 @@ class App extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Weather',
           theme: themeState.theme,
+
+          ///创建BlocProvider的，表明该Page，
+          ///我们是用WeatherBloc，WeatherBloc是属于该页面的Bloc了
           home: BlocProvider(
             create: (context) => WeatherBloc(
               weatherRepository: weatherRepository,

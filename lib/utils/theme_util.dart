@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ThemeUtil {
+  /// Wanandroid app的主题
   /// 默认主题色
   static const Color defaultColor = Colors.redAccent;
 
@@ -29,5 +30,18 @@ class ThemeUtil {
         dividerColor: Color(0x1F000000),
       );
     }
+  }
+
+  ///Git app的主题
+  static final ThemeData _themeData = ThemeData.light();
+
+  static get theme {
+    return _themeData.copyWith(
+      primaryColor: Colors.black,
+    );
+  }
+
+  static ThemeData changeTheme(Color color) {
+    return _themeData.copyWith(primaryColor: color);
   }
 }

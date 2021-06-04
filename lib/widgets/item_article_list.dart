@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:start_app/model/article_model.dart';
 import 'package:start_app/res/my_colors.dart';
-import 'package:start_app/utils/route_util.dart';
+import 'package:start_app/router/route_util.dart';
 import 'package:start_app/utils/toast_util.dart';
 import 'package:start_app/widgets/custom_cached_image.dart';
 import 'package:start_app/widgets/like_button.dart';

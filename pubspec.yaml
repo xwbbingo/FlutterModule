@@ -24,7 +24,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -38,12 +37,19 @@ dependencies:
   # 强大的Flutter Widgets可与bloc配合使用，以构建快速，反应灵活的移动端应用程序
   # https://github.com/felangel/bloc/tree/master/packages/flutter_bloc
   flutter_bloc: ^7.0.0
-  #评价评分
-  flutter_rating_bar: ^2.0.0+2
-  #国际化包
-  intl: ^0.15.8
-  #国际化工具 arb文件
-  intl_translation: ^0.17.2
+  # Redux for Dart 将泛型用于类型化状态。
+  # https://github.com/fluttercommunity/redux.dart
+  redux: ^5.0.0
+  # 结合redux使用
+  # https://github.com/brianegan/flutter_redux
+  flutter_redux: ^0.8.2
+
+  #  #国际化包
+  #  intl: ^0.15.8
+  #  #国际化工具 arb文件
+  #  intl_translation: ^0.17.6
+  flutter_localizations:
+    sdk: flutter
 
   ########### 网络相关 ###########
   #网络请求 https://github.com/dart-lang/http
@@ -54,13 +60,16 @@ dependencies:
   dio_cookie_manager: 1.0.0
   #dio_cookie_manager需要此依赖 https://github.com/flutterchina/cookie_jar
   cookie_jar: ^1.0.1
+  #网络连接检测
+  connectivity: ^0.3.2
 
-  #路由工具
-  #fluro: ^2.0.3
+  #路由工具 https://github.com/lukepighetti/fluro
+  fluro: ^2.0.3
+
   #接口服务封装工具  https://github.com/trevorwang/retrofit.dart
   #retrofit: any
   #日志打印
-  #logger: any
+  logger: ^1.0.0
 
   # 图片缓存 https://github.com/renefloor/flutter_cached_network_image
   cached_network_image: ^2.0.0
@@ -72,6 +81,8 @@ dependencies:
   flutter_swiper: ^1.1.6
   # 丰富的加载Loading样式 https://github.com/jogboms/flutter_spinkit
   flutter_spinkit: ^5.0.0
+  #评价评分
+  flutter_rating_bar: ^2.0.0+2
 
   ########### 工具相关 ###########
   #吐司 https://github.com/PonnamKarthik/FlutterToast
@@ -124,6 +135,11 @@ flutter:
     - assets/images/2.0x/
     - assets/images/3.0x/
     - assets/weather/
+    - assets/git/
+    - assets/git/comment/
+    - assets/git/guide/
+    - assets/git/issue/
+    - assets/git/profile/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
