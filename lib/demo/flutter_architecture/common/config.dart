@@ -1,8 +1,11 @@
 class Config {
   static const int PAGE_SIZE = 20;
   //需要更换
-  static const CLIENT_ID = "e7296dc864677f8c7ddb";
-  static const CLIENT_SECRET = "37bee0f576c29767a17d69a40830d7c243115fd0";
+  static const CLIENT_ID = "e109399f2cb2eabec810";
+  static const CLIENT_SECRET = "e8999a7e1de1122f282609e21ca5b09818d418a7";
+
+  static const HOMEPAGE_URL = "http://www.startapp.com/";
+  static const AUTHORIZATION_URL = "http://www.startapp.com/auth/";
 
   static const SHOW_GUIDE_VERSION = '1.3.0';
 

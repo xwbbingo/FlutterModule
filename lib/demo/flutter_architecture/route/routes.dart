@@ -75,6 +75,11 @@ class AppRoutes {
       transitionType: TransitionType.cupertino,
     );
     router.define(
+      loginWebview,
+      handler: loginWebviewHandler,
+      transitionType: TransitionType.cupertino,
+    );
+    router.define(
       login,
       handler: loginHandler,
       transitionType: TransitionType.cupertino,
@@ -298,11 +303,6 @@ class AppRoutes {
 //    router.define(
 //      repo_topic,
 //      handler: topicReposHandler,
-//      transitionType: TransitionType.cupertino,
-//    );
-//    router.define(
-//      loginWebview,
-//      handler: loginWebviewHandler,
 //      transitionType: TransitionType.cupertino,
 //    );
   }

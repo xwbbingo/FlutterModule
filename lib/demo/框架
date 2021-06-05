@@ -19,6 +19,8 @@ Redux 提供了一个combineReducers方法，用于 Reducer 的拆分
 5.middleware 
 中间伯,做异步操作
 
+
+
 1->发出action
 store.dispatch(action) 
 
@@ -29,3 +31,38 @@ requestingLogin(LoginState state, action)
 3->State 一旦有变化，Store 就会调用监听函数
 // 设置监听函数
 store.subscribe(listener);
+
+##第三方登录的原理
+所谓第三方登录，实质就是 OAuth 授权。用户想要登录 A 网站，A 网站让用户提供第三方网站的数据，
+证明自己的身份。获取第三方网站的身份数据，就需要 OAuth 授权。
+
+举例来说，A 网站允许 GitHub 登录，背后就是下面的流程。
+
+1.A 网站让用户跳转到 GitHub。
+2.GitHub 要求用户登录，然后询问"A 网站要求获得 xx 权限，你是否同意？"
+3.用户同意，GitHub 就会重定向回 A 网站，同时发回一个授权码。
+4.A 网站使用授权码，向 GitHub 请求令牌。
+5.GitHub 返回令牌.
+6.A 网站使用令牌，向 GitHub 请求用户数据。
+
+原文链接：https://blog.csdn.net/qq_42992919/article/details/95197953
+
+##构建OAuth应用程序
+https://docs.github.com/cn/developers/apps/building-oauth-apps
+1. 请求用户的 GitHub 身份
+GET https://github.com/login/oauth/authorize
+?client_id=xxxxxxxxxxxxxxxxxx
+&state=xxxxxxxxxxxxxxxxxx
+&redirect_uri=http://localhost:8080/login
+
+
+2. 用户被 GitHub 重定向回您的站点
+POST https://github.com/login/oauth/access_token
+?client_id=xxxxxxxxxxxxxxxxxxx
+&client_secret=xxxxxxxxxxxxxxxxx
+&code=xxxxxxxxxxxxxxxxxxx
+
+
+3. 使用访问令牌访问 API
+Authorization: token OAUTH-TOKEN
+GET https://api.github.com/user

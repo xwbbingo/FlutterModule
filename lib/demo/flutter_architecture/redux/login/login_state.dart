@@ -1,16 +1,18 @@
+import 'package:start_app/demo/flutter_architecture/status/status.dart';
+
 class LoginState {
-  final bool isLoading;
+  final LoadingStatus status;
   final String token;
 
-  LoginState({this.isLoading, this.token});
+  LoginState({this.status, this.token});
 
   factory LoginState.initial() {
-    return LoginState(isLoading: false, token: '');
+    return LoginState(status: LoadingStatus.idle, token: '');
   }
 
-  LoginState copyWith({bool isLoading, String token}) {
+  LoginState copyWith({LoadingStatus status, String token}) {
     return LoginState(
-      isLoading: isLoading ?? this.isLoading,
+      status: status ?? this.status,
       token: token ?? this.token,
     );
   }

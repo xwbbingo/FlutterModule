@@ -2,7 +2,9 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:start_app/demo/flutter_architecture/page/guide/guide_page.dart';
 import 'package:start_app/demo/flutter_architecture/page/guide/splash_page.dart';
-import 'package:start_app/demo/flutter_architecture/page/login_page.dart';
+import 'package:start_app/demo/flutter_architecture/page/login/login_page.dart';
+
+import 'fluro_util.dart';
 
 var splashHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -16,6 +18,12 @@ var guideHandler = Handler(
 
 var mainHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return SplashPage();
+});
+
+var loginWebviewHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  String url = FluroUtil.decode(params["url"]?.first);
   return SplashPage();
 });
 
