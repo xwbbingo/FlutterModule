@@ -68,7 +68,7 @@ dependencies:
 
   #接口服务封装工具  https://github.com/trevorwang/retrofit.dart
   #retrofit: any
-  #日志打印
+  #日志打印 https://github.com/leisim/logger
   logger: ^1.0.0
 
   # 图片缓存 https://github.com/renefloor/flutter_cached_network_image

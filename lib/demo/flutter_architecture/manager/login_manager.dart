@@ -1,6 +1,9 @@
+import 'dart:io';
+
+import 'package:start_app/application.dart';
+import 'package:start_app/demo/flutter_architecture/common/config.dart';
 import 'package:start_app/demo/flutter_architecture/common/sp_const.dart';
 import 'package:start_app/demo/flutter_architecture/http/api.dart';
-import 'package:start_app/demo/flutter_architecture/http/config.dart';
 import 'package:start_app/demo/flutter_architecture/http/credentials.dart';
 import 'package:start_app/demo/flutter_architecture/http/http_request.dart';
 import 'package:start_app/demo/flutter_architecture/models/login_bean.dart';
@@ -47,6 +50,18 @@ class LoginManager {
 
     if (response != null && response.data != null) {
       return LoginBean.fromJson(response.data);
+    }
+    return null;
+  }
+
+  auth(String code) async {
+    final response = await HttpRequest().get(Api.getAuth(code), isCache: false);
+    if (response != null && response.data != null) {
+      var result = Uri.parse("startapp://oauth?" + response.data);
+      var token = result.queryParameters["access_token"];
+      var tokenType = result.queryParameters["token_type"];
+      logger.v(token + "  " + tokenType);
+      return token;
     }
     return null;
   }

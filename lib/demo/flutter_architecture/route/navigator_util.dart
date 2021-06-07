@@ -6,6 +6,22 @@ import 'package:start_app/demo/flutter_architecture/route/routes.dart';
 import 'fluro_util.dart';
 
 class NavigatorUtil {
+  //h5页面
+  static goWebView(BuildContext context, title, url) {
+    Application.router.navigateTo(
+        context,
+        AppRoutes.webview +
+            "?title=${FluroUtil.encode(title)}&url=${FluroUtil.encode(url)}");
+  }
+
+  static goWebViewForAd(BuildContext context, title, url) {
+    Application.router.navigateTo(
+        context,
+        AppRoutes.webview +
+            "?title=${FluroUtil.encode(title)}&url=${FluroUtil.encode(url)}&isAd=${FluroUtil.encode(true.toString())}",
+        replace: true);
+  }
+
   //主页
   static goMain(BuildContext context) {
     Application.router.navigateTo(context, AppRoutes.main, replace: true);
@@ -170,21 +186,7 @@ class NavigatorUtil {
 //    Application.router.navigateTo(context, AppRoutes.language);
 //  }
 //
-//  //h5页面
-//  static goWebView(BuildContext context, title, url) {
-//    Application.router.navigateTo(
-//        context,
-//        AppRoutes.webview +
-//            "?title=${FluroUtil.encode(title)}&url=${FluroUtil.encode(url)}");
-//  }
-//
-  static goWebViewForAd(BuildContext context, title, url) {
-    Application.router.navigateTo(
-        context,
-        AppRoutes.webview +
-            "?title=${FluroUtil.encode(title)}&url=${FluroUtil.encode(url)}&isAd=${FluroUtil.encode(true.toString())}",
-        replace: true);
-  }
+
 //
 //  //功能介绍页
 //  static goTimeline(BuildContext context) {

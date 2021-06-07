@@ -84,6 +84,11 @@ class AppRoutes {
       handler: loginHandler,
       transitionType: TransitionType.cupertino,
     );
+    router.define(
+      webview,
+      handler: loginHandler,
+      transitionType: TransitionType.cupertino,
+    );
 
 //    router.define(
 //      setting,
@@ -98,11 +103,6 @@ class AppRoutes {
 //    router.define(
 //      language,
 //      handler: languageHandler,
-//      transitionType: TransitionType.cupertino,
-//    );
-//    router.define(
-//      webview,
-//      handler: webviewHandler,
 //      transitionType: TransitionType.cupertino,
 //    );
 //    router.define(

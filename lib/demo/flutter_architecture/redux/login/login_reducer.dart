@@ -1,13 +1,13 @@
-import 'package:logger/logger.dart';
 import 'package:redux/redux.dart';
+import 'package:start_app/application.dart';
 import 'package:start_app/demo/flutter_architecture/status/status.dart';
 
 import 'login_action.dart';
 import 'login_state.dart';
 
 const String TAG = "loginReducer";
-var logger = Logger();
 
+//用于处理middleware里回调相关的action,即状态发生变化
 final loginReducer = combineReducers<LoginState>([
   TypedReducer<LoginState, RequestingLoginAction>(_requestingLogin),
   TypedReducer<LoginState, ReceivedLoginAction>(_receivedLogin),

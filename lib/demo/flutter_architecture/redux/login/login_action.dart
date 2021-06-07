@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:start_app/demo/flutter_architecture/models/user_bean.dart';
 
+//发送dispatch相关的action
+//密码登录
 class FetchLoginAction {
   final BuildContext context;
   final String userName;
@@ -9,6 +11,7 @@ class FetchLoginAction {
   FetchLoginAction(this.context, this.userName, this.password);
 }
 
+//授权登录
 class AuthLoginAction {
   final BuildContext context;
   final String code;
@@ -16,11 +19,15 @@ class AuthLoginAction {
   AuthLoginAction(this.context, this.code);
 }
 
+//回调相关的action
 class ReceivedLoginAction {
-  final String token;
-  final UserBean user;
+  ReceivedLoginAction(
+    this.token,
+    this.userBean,
+  );
 
-  ReceivedLoginAction(this.token, this.user);
+  final String token;
+  final UserBean userBean;
 }
 
 class RequestingLoginAction {}

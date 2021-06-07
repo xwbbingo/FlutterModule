@@ -6,12 +6,14 @@ import 'package:start_app/demo/flutter_architecture/manager/login_manager.dart';
 import 'package:start_app/demo/flutter_architecture/models/user_bean.dart';
 import 'package:start_app/demo/flutter_architecture/redux/app_state.dart';
 import 'package:start_app/demo/flutter_architecture/redux/common_action.dart';
+import 'package:start_app/demo/flutter_architecture/redux/login/login_action.dart';
 import 'package:start_app/demo/flutter_architecture/route/navigator_util.dart';
 import 'package:start_app/demo/flutter_architecture/status/status.dart';
 import 'package:start_app/demo/flutter_architecture/util/locale_util.dart';
 import 'package:start_app/demo/flutter_architecture/util/sp_util.dart';
 import 'package:start_app/utils/theme_util.dart';
 import 'package:start_app/utils/timer_util.dart';
+import 'package:start_app/utils/toast_util.dart';
 
 import 'user_action.dart';
 
@@ -25,6 +27,8 @@ class UserMiddleware extends MiddlewareClass<AppState> {
       _startCountdown(store, next, action.context);
     } else if (action is StopCountdownAction) {
       TimerUtil.cancelCountdown();
+    } else if (action is FetchUserAction) {
+      _fetchUser(store, next, action.context, action.token);
     }
   }
 
@@ -86,6 +90,21 @@ class UserMiddleware extends MiddlewareClass<AppState> {
       NavigatorUtil.goMain(context);
     } else if (status == LoginStatus.error) {
       NavigatorUtil.goLogin(context);
+    }
+  }
+
+  Future<void> _fetchUser(
+      Store<AppState> store, next, BuildContext context, String token) async {
+    UserBean userBean = await LoginManager.instance.getMyUserInfo();
+    if (userBean != null) {
+      next(InitCompleteAction(token, userBean, false));
+      next(ReceivedLoginAction(token, userBean));
+      NavigatorUtil.goMain(context);
+    } else {
+      //用户信息为null
+      ToastUtil.show(msg: '登录失败请重新登录');
+      LoginManager.instance.setToken(null, true);
+      next(ErrorLoadingLoginAction());
     }
   }
 }
