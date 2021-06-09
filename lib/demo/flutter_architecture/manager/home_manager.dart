@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:start_app/demo/flutter_architecture/bean/home_banner_bean.dart';
+import 'package:start_app/demo/flutter_architecture/bean/home_item_bean.dart';
 import 'package:start_app/demo/flutter_architecture/http/api.dart';
 import 'package:start_app/demo/flutter_architecture/http/http_request.dart';
 
@@ -30,5 +34,11 @@ class HomeManager {
       return [];
     }
     return null;
+  }
+
+  Future<HomeItemBean> getHomeItem() async {
+    var data = await rootBundle.loadString('assets/data/home_data.json');
+    Map map = json.decode(data);
+    return HomeItemBean.fromJson(map);
   }
 }

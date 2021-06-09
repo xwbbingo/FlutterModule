@@ -21,7 +21,7 @@ class HomeBloc extends BaseBloc<LoadingBean<HomeBean>> {
   @override
   void getData() async {
     await _fetchHomeBanner();
-    // await _fetchHomeList();
+    await _fetchHomeList();
   }
 
   @override
@@ -40,6 +40,12 @@ class HomeBloc extends BaseBloc<LoadingBean<HomeBean>> {
     } else {
       bean.isError = true;
     }
+  }
+
+  _fetchHomeList() async {
+    LogUtil.v('_fetchHomeList', tag: TAG);
+    var result = await HomeManager.instance.getHomeItem();
+    bean.data.itemBean = result;
   }
 
 //  void _checkUpgrade(BuildContext context) {
