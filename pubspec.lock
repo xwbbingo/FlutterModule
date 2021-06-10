@@ -274,6 +274,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.10.11"
+  flukit:
+    dependency: "direct main"
+    description:
+      name: flukit
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   fluro:
     dependency: "direct main"
     description:
