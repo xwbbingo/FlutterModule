@@ -31,4 +31,22 @@ class Api {
   static String authorizations() {
     return "${_BASE_URL}authorizations";
   }
+
+  static repos(sort) {
+    sort ??= 'pushed';
+    return '${_BASE_URL}user/repos?sort=$sort';
+  }
+
+  //处理分页参数
+  static getPageParams(tab, page, [pageSize = Config.PAGE_SIZE]) {
+    if (page != null) {
+      if (pageSize != null) {
+        return '${tab}page=$page&per_page=$pageSize';
+      } else {
+        return '${tab}page=$page';
+      }
+    } else {
+      return '';
+    }
+  }
 }

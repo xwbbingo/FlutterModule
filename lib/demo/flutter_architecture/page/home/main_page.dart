@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:start_app/demo/flutter_architecture/bloc/home_bloc.dart';
+import 'package:start_app/demo/flutter_architecture/bloc/repo_bloc.dart';
+import 'package:start_app/demo/flutter_architecture/bloc/repo_main_bloc.dart';
 import 'package:start_app/demo/flutter_architecture/common/image_path.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/bloc/bloc_provider.dart';
 import 'package:start_app/demo/flutter_architecture/localizations/app_localizations.dart';
 import 'package:start_app/demo/flutter_architecture/manager/login_manager.dart';
 import 'package:start_app/demo/flutter_architecture/models/user_bean.dart';
 import 'package:start_app/demo/flutter_architecture/page/home/home_page.dart';
+import 'package:start_app/demo/flutter_architecture/page/home/repo_page.dart';
 import 'package:start_app/demo/flutter_architecture/util/image_util.dart';
 import 'package:start_app/demo/flutter_architecture/util/size_util.dart';
 import 'package:start_app/utils/screen_util.dart';
@@ -30,6 +33,7 @@ class _MainPageState extends State<MainPage>
   UserBean _userBean;
 
   HomeBloc _homeBloc;
+  RepoBloc _reposBloc;
 
   int _exitTime = 0;
 
@@ -43,6 +47,7 @@ class _MainPageState extends State<MainPage>
     String userName = _userBean != null ? _userBean.login : "";
 
     _homeBloc = HomeBloc();
+    _reposBloc = RepoMainBloc(userName);
   }
 
   @override
@@ -52,9 +57,9 @@ class _MainPageState extends State<MainPage>
     choices[0] = Choice(
       title: AppLocalizations.of(context).currentlocal.home,
     );
-//    choices[1] = Choice(
-//      title: AppLocalizations.of(context).currentlocal.repository,
-//    );
+    choices[1] = Choice(
+      title: AppLocalizations.of(context).currentlocal.repository,
+    );
 //    choices[2] = Choice(
 //      title: AppLocalizations.of(context).currentlocal.event,
 //    );
@@ -131,7 +136,11 @@ class _MainPageState extends State<MainPage>
                 BlocProvider(
                   child: HomePage(),
                   bloc: _homeBloc,
-                )
+                ),
+                BlocProvider(
+                  child: RepoPage(RepoPage.PAGE_HOME),
+                  bloc: _reposBloc,
+                ),
               ],
               onPageChanged: (index) {
                 _tabController.animateTo(index);

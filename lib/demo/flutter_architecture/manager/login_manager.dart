@@ -10,6 +10,27 @@ import 'package:start_app/demo/flutter_architecture/models/login_bean.dart';
 import 'package:start_app/demo/flutter_architecture/models/user_bean.dart';
 import 'package:start_app/demo/flutter_architecture/util/sp_util.dart';
 
+//你需要构造函数不是每次都创建一个新的对象时，使用factory关键字。
+//
+//class 类名 {
+//  单例公开访问点
+//  factory 类名() =>_静态获取单例的方法()
+//
+//  静态私有成员，没有初始化
+//  static 类名 _单例名;
+//
+//  私有构造函数
+//  类名._构造函数名称() { 若要初始化}
+//
+//  对外暴露的单例
+//  static 类名 _静态获取单例的方法() {
+//  if (_单例名 == null) {
+//  _单例名 = 类名._构造函数名称();
+//  }
+//  return _单例名;
+//  }
+//}
+
 class LoginManager {
   factory LoginManager() => _getInstance();
 

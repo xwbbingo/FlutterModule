@@ -9,7 +9,10 @@ import 'package:start_app/utils/text_util.dart';
 class HomeItemWidget extends StatelessWidget {
   final HomeItem model;
 
-  const HomeItemWidget({Key key, this.model}) : super(key: key);
+  const HomeItemWidget(
+    this.model, {
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

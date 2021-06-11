@@ -7,6 +7,8 @@ import 'package:start_app/demo/flutter_architecture/bloc/home_bloc.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/bloc/base_stateless_widget.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/bloc/loading_bean.dart';
 import 'package:start_app/demo/flutter_architecture/page/widget/header_item_widget.dart';
+import 'package:start_app/demo/flutter_architecture/page/widget/home_item_widget.dart';
+import 'package:start_app/demo/flutter_architecture/route/navigator_util.dart';
 import 'package:start_app/demo/flutter_architecture/util/image_util.dart';
 
 class HomePage extends BaseStatelessWidget<LoadingBean<HomeBean>, HomeBloc> {
@@ -51,7 +53,7 @@ class HomePage extends BaseStatelessWidget<LoadingBean<HomeBean>, HomeBloc> {
         children: banner.map((model) {
           return InkWell(
             onTap: () {
-//              NavigatorUtil.goWebView(context, model.title, model.url);
+              NavigatorUtil.goWebView(context, model.title, model.url);
             },
             child: ImageUtil.getNetworkImage(model.imagePath),
           );
@@ -62,7 +64,9 @@ class HomePage extends BaseStatelessWidget<LoadingBean<HomeBean>, HomeBloc> {
 
   _buildItem(BuildContext context, List<HomeItem> item, IconData leftIcon,
       String title) {
-    List<Widget> _children = item.map((model) {}).toList();
+    List<Widget> _children = item.map((model) {
+      return HomeItemWidget(model);
+    }).toList();
     List<Widget> children = <Widget>[];
     children.add(HeaderItemWidget(
       leftIcon: leftIcon,

@@ -91,7 +91,8 @@ dependencies:
   ########### 工具相关 ###########
   #吐司 https://github.com/PonnamKarthik/FlutterToast
   fluttertoast: ^8.0.7
-
+  #markdown
+  markdown: any
 
 
 
