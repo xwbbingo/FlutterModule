@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:start_app/application.dart';
+import 'package:start_app/demo/flutter_architecture/bloc/profile_bloc.dart';
+import 'package:start_app/demo/flutter_architecture/commonui/bloc/bloc_provider.dart';
+import 'package:start_app/demo/flutter_architecture/page/profile/user_profile_new_page.dart';
 import 'package:start_app/demo/flutter_architecture/route/routes.dart';
 
 import 'fluro_util.dart';
@@ -41,6 +44,26 @@ class NavigatorUtil {
   //引导页
   static goGuide(BuildContext context) {
     Application.router.navigateTo(context, AppRoutes.guide, replace: true);
+  }
+
+  //用户资料
+  static goUserProfile(BuildContext context, name, avatar, heroTag) {
+//    Application.router.navigateTo(
+//        context, AppRoutes.profile + "?name=${FluroUtil.encode(name)}");
+    goProfile(context, name, avatar, heroTag);
+  }
+
+  //资料页
+  static goProfile(BuildContext context, name, avatar, heroTag) async {
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => BlocProvider<ProfileBloc>(
+          child: UserProfileNewPage(heroTag),
+          bloc: ProfileBloc(name),
+        ),
+      ),
+    );
   }
 
 //
@@ -87,12 +110,7 @@ class NavigatorUtil {
 //            "?reposOwner=${FluroUtil.encode(reposOwner)}&reposName=${FluroUtil.encode(reposName)}");
 //  }
 //
-//  //用户资料
-//  static goUserProfile(BuildContext context, name, avatar, heroTag) {
-////    Application.router.navigateTo(
-////        context, AppRoutes.profile + "?name=${FluroUtil.encode(name)}");
-//    goProfile(context, name, avatar, heroTag);
-//  }
+
 //
 //  //查看源码文件目录
 //  static goReposSourceFile(
@@ -395,18 +413,7 @@ class NavigatorUtil {
 //        context, AppRoutes.repo_topic + "?name=${FluroUtil.encode(name)}");
 //  }
 //
-//  //资料页
-//  static goProfile(BuildContext context, name, avatar, heroTag) async {
-//    Navigator.push(
-//      context,
-//      CupertinoPageRoute(
-//        builder: (context) => BlocProvider<ProfileBloc>(
-//          child: UserProfilePage(heroTag),
-//          bloc: ProfileBloc(name),
-//        ),
-//      ),
-//    );
-//  }
+
 //
 //  static goFlutterHot(BuildContext context) async {
 //    Navigator.push(

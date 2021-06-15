@@ -9,6 +9,8 @@ class ImagePath {
   static const String image_comment = '$_image_path/ic_comment.png';
   static const String image_like = '$_image_path/ic_like.png';
   static const String image_splash_ad = '$_image_path/bg_splash_ad.png';
+  static const String image_network_error = '$_image_path/ic_network_error.png';
+  static const String image_no_data = '$_image_path/ic_no_data.png';
 
   static const String _image_comment_path = '$_image_path/comment';
   static const String image_comment_like = '$_image_comment_path/1f44d.png';

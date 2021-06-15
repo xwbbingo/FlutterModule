@@ -1,4 +1,4 @@
-import 'package:start_app/demo/flutter_architecture/models/user_bean.dart';
+import 'package:start_app/demo/flutter_architecture/bean/user_bean.dart';
 import 'package:start_app/demo/flutter_architecture/status/status.dart';
 
 class UserState {

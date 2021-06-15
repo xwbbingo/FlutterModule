@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
+import 'package:start_app/demo/flutter_architecture/bean/user_bean.dart';
 import 'package:start_app/demo/flutter_architecture/common/config.dart';
 import 'package:start_app/demo/flutter_architecture/common/sp_const.dart';
 import 'package:start_app/demo/flutter_architecture/manager/login_manager.dart';
-import 'package:start_app/demo/flutter_architecture/models/user_bean.dart';
+import 'package:start_app/demo/flutter_architecture/manager/repos_manager.dart';
 import 'package:start_app/demo/flutter_architecture/redux/app_state.dart';
 import 'package:start_app/demo/flutter_architecture/redux/common_action.dart';
 import 'package:start_app/demo/flutter_architecture/redux/login/login_action.dart';
@@ -67,8 +68,8 @@ class UserMiddleware extends MiddlewareClass<AppState> {
     String version = SpUtil.instance.getString(SP_KEY_SHOW_GUIDE_VERSION);
     String currentVersion = Config.SHOW_GUIDE_VERSION;
     next(InitCompleteAction(token, userBean, currentVersion != version));
-//    //初始化本地数据
-//    ReposManager.instance.initLanguageColors();
+    //初始化本地数据
+    ReposManager.instance.initLanguageColors();
   }
 
   void _startCountdown(Store<AppState> store, next, BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_app/demo/flutter_architecture/models/user_bean.dart';
+import 'package:start_app/demo/flutter_architecture/bean/user_bean.dart';
 
 //发送dispatch相关的action
 //密码登录

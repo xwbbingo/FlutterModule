@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
+import 'package:start_app/demo/flutter_architecture/bean/login_bean.dart';
 import 'package:start_app/demo/flutter_architecture/manager/login_manager.dart';
-import 'package:start_app/demo/flutter_architecture/models/login_bean.dart';
 import 'package:start_app/demo/flutter_architecture/redux/app_state.dart';
 import 'package:start_app/demo/flutter_architecture/redux/user/user_action.dart';
 import 'package:start_app/demo/flutter_architecture/util/log_util.dart';

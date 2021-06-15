@@ -20,6 +20,13 @@ class RepoPage extends BaseListStatelessWidget<Repository, RepoBloc> {
   RepoPage(this.page);
 
   @override
+  bool isNeedScaffold() =>
+      page != PAGE_HOME &&
+      page != PAGE_USER &&
+      page != PAGE_USER_STAR &&
+      page != PAGE_ORG;
+
+  @override
   String getTitle(BuildContext context) {
     String title;
 

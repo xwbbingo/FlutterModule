@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:start_app/demo/flutter_architecture/bean/license_bean.dart';
-import 'package:start_app/demo/flutter_architecture/models/user_bean.dart';
+import 'package:start_app/demo/flutter_architecture/bean/user_bean.dart';
 
 part 'repos_bean.g.dart';
 

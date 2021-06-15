@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:start_app/application.dart';
+import 'package:start_app/demo/flutter_architecture/bean/login_bean.dart';
+import 'package:start_app/demo/flutter_architecture/bean/user_bean.dart';
 import 'package:start_app/demo/flutter_architecture/common/config.dart';
 import 'package:start_app/demo/flutter_architecture/common/sp_const.dart';
 import 'package:start_app/demo/flutter_architecture/http/api.dart';
 import 'package:start_app/demo/flutter_architecture/http/credentials.dart';
 import 'package:start_app/demo/flutter_architecture/http/http_request.dart';
-import 'package:start_app/demo/flutter_architecture/models/login_bean.dart';
-import 'package:start_app/demo/flutter_architecture/models/user_bean.dart';
 import 'package:start_app/demo/flutter_architecture/util/sp_util.dart';
 
 //你需要构造函数不是每次都创建一个新的对象时，使用factory关键字。

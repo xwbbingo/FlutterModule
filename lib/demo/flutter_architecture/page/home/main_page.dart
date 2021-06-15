@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:start_app/demo/flutter_architecture/bean/user_bean.dart';
 import 'package:start_app/demo/flutter_architecture/bloc/home_bloc.dart';
 import 'package:start_app/demo/flutter_architecture/bloc/repo_bloc.dart';
 import 'package:start_app/demo/flutter_architecture/bloc/repo_main_bloc.dart';
@@ -7,7 +8,7 @@ import 'package:start_app/demo/flutter_architecture/common/image_path.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/bloc/bloc_provider.dart';
 import 'package:start_app/demo/flutter_architecture/localizations/app_localizations.dart';
 import 'package:start_app/demo/flutter_architecture/manager/login_manager.dart';
-import 'package:start_app/demo/flutter_architecture/models/user_bean.dart';
+import 'package:start_app/demo/flutter_architecture/page/home/drawer_page.dart';
 import 'package:start_app/demo/flutter_architecture/page/home/home_page.dart';
 import 'package:start_app/demo/flutter_architecture/page/home/repo_page.dart';
 import 'package:start_app/demo/flutter_architecture/util/image_util.dart';
@@ -41,7 +42,7 @@ class _MainPageState extends State<MainPage>
   void initState() {
     super.initState();
     //RedPointManager.instance.addState(this);
-    _tabController = TabController(vsync: this, length: 1);
+    _tabController = TabController(vsync: this, length: 2);
     _userBean = LoginManager.instance.getUserBean();
 
     String userName = _userBean != null ? _userBean.login : "";
@@ -54,12 +55,12 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     SizeUtil.size = MediaQuery.of(context).size;
     final List<Choice> choices = <Choice>[];
-    choices[0] = Choice(
+    choices.add(Choice(
       title: AppLocalizations.of(context).currentlocal.home,
-    );
-    choices[1] = Choice(
+    ));
+    choices.add(Choice(
       title: AppLocalizations.of(context).currentlocal.repository,
-    );
+    ));
 //    choices[2] = Choice(
 //      title: AppLocalizations.of(context).currentlocal.event,
 //    );
@@ -71,7 +72,9 @@ class _MainPageState extends State<MainPage>
           length: choices.length,
           child: Scaffold(
             key: _scaffoldKey,
-            drawer: Container(),
+            drawer: Drawer(
+              child: DrawerPage(),
+            ),
             appBar: AppBar(
               leading: Builder(
                 builder: (BuildContext context) {
@@ -133,11 +136,11 @@ class _MainPageState extends State<MainPage>
               controller: _pageController,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                BlocProvider(
+                BlocProvider<HomeBloc>(
                   child: HomePage(),
                   bloc: _homeBloc,
                 ),
-                BlocProvider(
+                BlocProvider<RepoBloc>(
                   child: RepoPage(RepoPage.PAGE_HOME),
                   bloc: _reposBloc,
                 ),

@@ -43,7 +43,7 @@ class ReposManager {
   }
 
   Future<List<Repository>> getRepos(int page, String sort) async {
-    String url = Api.repos(sort);
+    String url = Api.repos(null);
     url += Api.getPageParams("&", page);
     final response = await HttpRequest().get(url);
     if (response != null && response.result) {
@@ -57,6 +57,7 @@ class ReposManager {
           list.add(repository);
         }
       }
+      return list;
     }
     return null;
   }
