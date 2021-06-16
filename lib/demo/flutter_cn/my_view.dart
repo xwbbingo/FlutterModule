@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:start_app/my_stateful.dart';
+
+import 'file:///E:/FlutterProject/start_app/lib/demo/flutter_cn/my_stateful.dart';
 
 class MyAppBar extends StatelessWidget {
   MyAppBar({this.title});

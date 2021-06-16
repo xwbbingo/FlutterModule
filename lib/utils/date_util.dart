@@ -97,7 +97,6 @@ class DateUtil {
     if (dateTime == null) {
       return '';
     }
-    ;
     String dateStr;
     if (_isZHFormat(format)) {
       dateStr = _formatZHDateTime(dateTime, format);

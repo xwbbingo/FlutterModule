@@ -42,6 +42,32 @@ class ReposManager {
     return _languageMap[language] ?? Colors.black;
   }
 
+  Future<List<Repository>> getUserRepos(
+      String userName, int page, String sort, bool isStar) async {
+    String url;
+    if (isStar) {
+      url = Api.userStar(userName, null);
+    } else {
+      url = Api.userRepos(userName, sort);
+    }
+    url += Api.getPageParams("&", page);
+    final response = await HttpRequest().get(url);
+    if (response != null && response.result) {
+      List<Repository> list = new List();
+      if (response.data != null && response.data.length > 0) {
+        for (int i = 0; i < response.data.length; i++) {
+          var dataItem = response.data[i];
+          Repository repository = Repository.fromJson(dataItem);
+          repository.description =
+              ReposUtil.getGitHubEmojHtml(repository.description ?? "暂无描述");
+          list.add(repository);
+        }
+      }
+      return list;
+    }
+    return null;
+  }
+
   Future<List<Repository>> getRepos(int page, String sort) async {
     String url = Api.repos(null);
     url += Api.getPageParams("&", page);

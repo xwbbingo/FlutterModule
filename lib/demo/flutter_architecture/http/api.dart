@@ -52,9 +52,22 @@ class Api {
     return "${_BASE_URL}authorizations";
   }
 
+  ///用户的仓库 get
+  static userRepos(userName, sort) {
+    sort ??= 'pushed';
+    return '${_BASE_URL}users/$userName/repos?sort=$sort';
+  }
+
   static repos(sort) {
     sort ??= 'pushed';
     return '${_BASE_URL}user/repos?sort=$sort';
+  }
+
+  //用户的star get
+  static userStar(userName, sort) {
+    sort ??= 'updated';
+
+    return '${_BASE_URL}users/$userName/starred?sort=$sort';
   }
 
   ///处理分页参数

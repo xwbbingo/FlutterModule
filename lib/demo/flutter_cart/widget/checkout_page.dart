@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:start_app/model/cart_model.dart';
-import 'package:start_app/model/food_model.dart';
+import 'package:start_app/demo/flutter_cart/model/cart_model.dart';
+import 'package:start_app/demo/flutter_cart/model/food_model.dart';
 import 'package:start_app/res/my_colors.dart';
 import 'package:start_app/res/my_styles.dart';
 

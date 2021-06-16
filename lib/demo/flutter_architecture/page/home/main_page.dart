@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:start_app/demo/flutter_architecture/bean/user_bean.dart';
 import 'package:start_app/demo/flutter_architecture/bloc/home_bloc.dart';
-import 'package:start_app/demo/flutter_architecture/bloc/repo_bloc.dart';
-import 'package:start_app/demo/flutter_architecture/bloc/repo_main_bloc.dart';
+import 'package:start_app/demo/flutter_architecture/bloc/repo/repo_bloc.dart';
+import 'package:start_app/demo/flutter_architecture/bloc/repo/repo_main_bloc.dart';
 import 'package:start_app/demo/flutter_architecture/common/image_path.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/bloc/bloc_provider.dart';
 import 'package:start_app/demo/flutter_architecture/localizations/app_localizations.dart';
@@ -53,6 +53,8 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
+    //屏幕适配初始化
+    ScreenAdapter.init(context);
     SizeUtil.size = MediaQuery.of(context).size;
     final List<Choice> choices = <Choice>[];
     choices.add(Choice(

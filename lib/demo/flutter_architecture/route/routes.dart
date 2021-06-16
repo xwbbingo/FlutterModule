@@ -86,7 +86,7 @@ class AppRoutes {
     );
     router.define(
       webview,
-      handler: loginHandler,
+      handler: webviewHandler,
       transitionType: TransitionType.cupertino,
     );
 

@@ -5,7 +5,7 @@ import 'package:start_app/demo/flutter_architecture/commonui/bloc/base_list_bloc
 import 'package:start_app/demo/flutter_architecture/util/log_util.dart';
 
 abstract class UserBloc extends BaseListBloc<UserBean> {
-  static final String TAG = "FollowBloc";
+  static final String TAG = "UserBloc";
 
   final String userName;
 

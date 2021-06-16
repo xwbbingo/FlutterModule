@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:start_app/demo/flutter_architecture/commonui/common_util.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/widget/side_bar.dart';
 import 'package:start_app/demo/flutter_architecture/util/image_util.dart';
 import 'package:start_app/utils/text_util.dart';
-
-import 'file:///E:/FlutterProject/start_app/lib/demo/flutter_architecture/commonui/common_util.dart';
 
 import '../common_style.dart';
 
@@ -309,11 +308,10 @@ class _RefreshListViewState extends State<_RefreshListView> {
     int itemCount = widget.widget.header == null
         ? widget.widget.itemCount
         : widget.widget.itemCount + 1;
-
-    return _buildPullList();
+    return _buildWidgetPullList();
   }
 
-  Widget _buildPullList() {
+  Widget _buildWidgetPullList() {
     int itemCount = widget.widget.header == null
         ? widget.widget.itemCount
         : widget.widget.itemCount + 1;

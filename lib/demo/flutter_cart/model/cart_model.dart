@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_app/model/food_model.dart';
+import 'package:start_app/demo/flutter_cart/model/food_model.dart';
 
 class CartModel {
   Food food;

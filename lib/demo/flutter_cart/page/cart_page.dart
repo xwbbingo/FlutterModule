@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:start_app/model/cart_model.dart';
-import 'package:start_app/model/food_model.dart';
+import 'package:start_app/demo/flutter_cart/model/cart_model.dart';
+import 'package:start_app/demo/flutter_cart/model/food_model.dart';
+import 'package:start_app/demo/flutter_cart/widget/cart_bottom_sheet.dart';
+import 'package:start_app/demo/flutter_cart/widget/food_card_widget.dart';
 import 'package:start_app/res/my_colors.dart';
 import 'package:start_app/res/my_styles.dart';
-import 'package:start_app/widgets/cart_bottom_sheet.dart';
-import 'package:start_app/widgets/food_card.dart';
 
-class HomePage extends StatefulWidget {
+class CartPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _CartPageState createState() => _CartPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _CartPageState extends State<CartPage> {
   int value = 0;
 
   @override
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisSpacing: 12,
               crossAxisSpacing: 16),
           itemBuilder: (context, index) {
-            return FoodCard(foods[index]);
+            return FoodCardWidget(foods[index]);
           }),
     );
   }

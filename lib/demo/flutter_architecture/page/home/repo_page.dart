@@ -1,6 +1,6 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:start_app/demo/flutter_architecture/bean/repos_bean.dart';
-import 'package:start_app/demo/flutter_architecture/bloc/repo_bloc.dart';
+import 'package:start_app/demo/flutter_architecture/bloc/repo/repo_bloc.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/bloc/base_list_stateless_widget.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/bloc/bloc_provider.dart';
 import 'package:start_app/demo/flutter_architecture/page/widget/repos_item_widget.dart';

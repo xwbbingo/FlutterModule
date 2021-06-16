@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:start_app/common/common.dart';
-import 'package:start_app/model/cart_model.dart';
 import 'package:start_app/net/dio_manager.dart';
-import 'package:start_app/page/home_page.dart';
 import 'package:start_app/router/router_config.dart' as myRouter;
 import 'package:start_app/ui/splash_screen.dart';
 import 'package:start_app/utils/theme_util.dart';
-
-import '../widgets/random_words.dart';
 
 void main() async {
   /// 修改问题: Unhandled Exception: ServicesBinding.defaultBinaryMessenger was accessed before the binding was initialized
@@ -55,54 +50,5 @@ class WanAndroidAppState extends State<WanAndroidApp> {
   void _initAsync() async {
     //初始化Dio
     await DioManager.init();
-  }
-}
-
-//void main() {
-//  runApp(new MaterialApp(
-//    title: 'My app', // used by the OS task switcher
-//    home: new MyApp(),
-//  ));
-//}
-
-class CartApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Cart(),
-      child: MaterialApp(
-        title: 'Flutter Food',
-        showSemanticsDebugger: false,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: HomePage(),
-      ),
-    );
-  }
-}
-
-class RandomWordsApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    //final wordPair = new WordPair.random();
-    return new MaterialApp(
-      title: 'Welcome to Flutter',
-      theme: new ThemeData(
-        primaryColor: Colors.white,
-      ),
-      home: new RandomWords(),
-//      home: new Scaffold(
-//        appBar: new AppBar(
-//          title: new Text('Welcome to Flutter'),
-//        ),
-//        body: new Center(
-//          //child: new Text('Hello World'),
-//          //child: new Text(wordPair.asPascalCase),
-//          child: new RandomWords(),
-//        ),
-//      ),
-    );
   }
 }

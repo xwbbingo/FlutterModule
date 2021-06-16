@@ -1,13 +1,18 @@
 import 'dart:ui';
 
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:start_app/demo/flutter_architecture/bean/user_bean.dart';
 import 'package:start_app/demo/flutter_architecture/bloc/profile_bloc.dart';
+import 'package:start_app/demo/flutter_architecture/bloc/repo/repo_bloc.dart';
+import 'package:start_app/demo/flutter_architecture/bloc/repo/repo_user_bloc.dart';
+import 'package:start_app/demo/flutter_architecture/bloc/repo/repo_user_star_bloc.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/bloc/base_stateless_widget.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/bloc/bloc_provider.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/bloc/loading_bean.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/common_style.dart';
 import 'package:start_app/demo/flutter_architecture/manager/user_manager.dart';
+import 'package:start_app/demo/flutter_architecture/page/home/repo_page.dart';
 import 'package:start_app/demo/flutter_architecture/route/navigator_util.dart';
 import 'package:start_app/demo/flutter_architecture/util/image_util.dart';
 import 'package:start_app/utils/screen_util.dart';
@@ -81,8 +86,8 @@ class _UserProfileState extends State<_UserProfilePage>
 
   TabController _tabController;
 
-//  RepoUserBloc _repoUserBloc;
-//  RepoUserStarBloc _repoUserStarBloc;
+  RepoUserBloc _repoUserBloc;
+  RepoUserStarBloc _repoUserStarBloc;
 //  FollowersBloc _followersBloc;
 //  FollowingBloc _followingBloc;
 //  UserEventBloc _userEventBloc;
@@ -91,11 +96,11 @@ class _UserProfileState extends State<_UserProfilePage>
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(vsync: this, length: 6);
+    _tabController = new TabController(vsync: this, length: 2);
 
     var name = widget.userBean.login;
-//    _repoUserBloc = RepoUserBloc(name);
-//    _repoUserStarBloc = RepoUserStarBloc(name);
+    _repoUserBloc = RepoUserBloc(name);
+    _repoUserStarBloc = RepoUserStarBloc(name);
 //    _followersBloc = FollowersBloc(name);
 //    _followingBloc = FollowingBloc(name);
 //    _userEventBloc = UserEventBloc(name);
@@ -103,10 +108,16 @@ class _UserProfileState extends State<_UserProfilePage>
   }
 
   @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 1,
+        length: 2,
         child: NestedScrollView(
           headerSliverBuilder: (c, s) => [
             SliverAppBar(
@@ -118,6 +129,7 @@ class _UserProfileState extends State<_UserProfilePage>
               bottom: _buildTabBar(),
             ),
           ],
+          body: _buildBody(),
         ),
       ),
     );
@@ -181,7 +193,14 @@ class _UserProfileState extends State<_UserProfilePage>
       isScrollable: true,
       controller: _tabController,
       indicatorColor: Colors.white,
-      tabs: [],
+      tabs: [
+        _buildTabItem('项目', widget.userBean.publicRepos),
+        _buildTabItem("star项目", -1),
+//        _buildTabItem("我关注的", widget.userBean.following),
+//        _buildTabItem("关注我的", widget.userBean.followers),
+//        _buildTabItem("动态", -1),
+//        _buildTabItem("组织", -1),
+      ],
       onTap: (index) {
         _pageController.jumpTo(ScreenUtil.screenWidthDp * index);
       },
@@ -246,9 +265,53 @@ class _UserProfileState extends State<_UserProfilePage>
         ));
   }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
+  _buildTabItem(String title, int count) {
+    if (count == -1) {
+      return Tab(
+        child: Text(
+          title,
+        ),
+      );
+    } else {
+      return Row(
+        children: <Widget>[
+          Text(
+            title,
+          ),
+          SizedBox(
+            width: 3.0,
+          ),
+          Badge(
+            elevation: 0,
+            shape: BadgeShape.circle,
+            badgeColor: Colors.white,
+            badgeContent: Text(
+              count.toString(),
+              style: YZStyle.minText,
+            ),
+          )
+        ],
+      );
+    }
+  }
+
+  _buildBody() {
+    return PageView(
+      controller: _pageController,
+      physics: NeverScrollableScrollPhysics(),
+      children: [
+        BlocProvider<RepoBloc>(
+          child: RepoPage(RepoPage.PAGE_USER),
+          bloc: _repoUserBloc,
+        ),
+        BlocProvider<RepoBloc>(
+          child: RepoPage(RepoPage.PAGE_USER_STAR),
+          bloc: _repoUserStarBloc,
+        ),
+      ],
+      onPageChanged: (index) {
+        _tabController.animateTo(index);
+      },
+    );
   }
 }

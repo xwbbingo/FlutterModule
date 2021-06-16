@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:start_app/model/cart_model.dart';
-import 'package:start_app/model/food_model.dart';
+import 'package:start_app/demo/flutter_cart/model/cart_model.dart';
+import 'package:start_app/demo/flutter_cart/model/food_model.dart';
 import 'package:start_app/res/my_colors.dart';
 import 'package:start_app/res/my_styles.dart';
 
-class FoodCard extends StatefulWidget {
+class FoodCardWidget extends StatefulWidget {
   final Food food;
 
-  FoodCard(this.food);
+  FoodCardWidget(this.food);
 
   @override
-  _FoodCardState createState() => _FoodCardState();
+  _FoodCardWidgetState createState() => _FoodCardWidgetState();
 }
 
-class _FoodCardState extends State<FoodCard> {
+class _FoodCardWidgetState extends State<FoodCardWidget> {
   Food get food => widget.food;
 
   @override

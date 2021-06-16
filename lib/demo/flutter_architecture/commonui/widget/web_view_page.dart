@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:start_app/demo/flutter_architecture/commonui/common_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
-import 'file:///E:/FlutterProject/start_app/lib/demo/flutter_architecture/commonui/common_util.dart';
 
 import '../common_style.dart';
 

@@ -1,4 +1,4 @@
-import 'package:start_app/demo/flutter_architecture/bloc/repo_bloc.dart';
+import 'package:start_app/demo/flutter_architecture/bloc/repo/repo_bloc.dart';
 import 'package:start_app/demo/flutter_architecture/manager/repos_manager.dart';
 
 class RepoMainBloc extends RepoBloc {
