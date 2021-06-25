@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:start_app/demo/flutter_cn/widget/random_words.dart';
+import 'package:start_app/widgets/drop_down_menu/drop_down_filter_widget.dart';
 
 void main() {
   runApp(new MaterialApp(
     title: 'My app', // used by the OS task switcher
-    home: RandomWordsApp(),
+    home: DropDownFilterWidget(),
+    //home: CustomScrollViewRoute(),
   ));
 }
 
