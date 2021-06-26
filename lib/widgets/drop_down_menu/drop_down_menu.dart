@@ -36,7 +36,7 @@ class DropDownMenu extends StatefulWidget {
     Key key,
     @required this.controller,
     @required this.menus,
-    this.animationMilliseconds = 500,
+    this.animationMilliseconds = 200,
     this.maskColor = const Color.fromRGBO(0, 0, 0, 0.5),
     this.dropdownMenuChanging,
     this.dropdownMenuChanged,
@@ -62,7 +62,6 @@ class _DropDownMenuState extends State<DropDownMenu>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     widget.controller.addListener(_onController);
@@ -162,6 +161,7 @@ class _DropDownMenuState extends State<DropDownMenu>
     setState(() {});
   }
 
+  ///增加点击空白处可关闭
   Widget _mask() {
     if (_isShowMask) {
       return GestureDetector(
@@ -184,11 +184,11 @@ class _DropDownMenuState extends State<DropDownMenu>
 
   Widget _buildDropDownWidget() {
     int menuIndex = widget.controller.menuIndex;
-
+    //点击头部的下标大于可展开菜单的长度,不显示下拉控件
     if (menuIndex >= widget.menus.length) {
       return Container();
     }
-
+    //显示下拉选择控件
     return Positioned(
         top: widget.controller.dropDownMenuTop,
         left: 0,

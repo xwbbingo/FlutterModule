@@ -41,16 +41,15 @@ class DropDownHeader extends StatefulWidget {
       this.headerHeight = 40,
       this.borderWidth = 1,
       this.borderColor = const Color(0xFFeeede6),
-      this.selectStyle =
-          const TextStyle(color: Color(0xFF666666), fontSize: 13),
+      this.selectStyle,
       this.normalStyle,
       this.iconSize = 20,
       this.iconColor = const Color(0xFFafada7),
       this.iconDropDownColor,
       this.dividerHeight = 20,
       this.dividerColor = const Color(0xFFeeede6),
-      @required this.controller,
       this.onItemTap,
+      @required this.controller,
       @required this.items,
       @required this.stackKey})
       : super(key: key);
@@ -61,11 +60,11 @@ class DropDownHeader extends StatefulWidget {
 
 class _DropDownHeaderState extends State<DropDownHeader>
     with SingleTickerProviderStateMixin {
+  GlobalKey _keyDropDownHeader = GlobalKey();
+
   bool _isShowDropDownItemWidget = false;
   double _screenWidth;
   int _menuCount;
-  GlobalKey _keyDropDownHeader = GlobalKey();
-
   TextStyle _dropDownStyle;
   Color _iconDropDownColor;
 
@@ -89,7 +88,7 @@ class _DropDownHeaderState extends State<DropDownHeader>
   @override
   Widget build(BuildContext context) {
     _dropDownStyle =
-        widget.normalStyle ?? TextStyle(color: Colors.red, fontSize: 13);
+        widget.selectStyle ?? TextStyle(color: Colors.red, fontSize: 13);
     _iconDropDownColor = widget.iconDropDownColor ?? Colors.blue;
 
     MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -123,6 +122,8 @@ class _DropDownHeaderState extends State<DropDownHeader>
     int index = widget.items.indexOf(item);
     int menuIndex = widget.controller.menuIndex;
     _isShowDropDownItemWidget = index == menuIndex && widget.controller.isShow;
+    print(
+        '提示：$index ---- $_isShowDropDownItemWidget ---- ${(index == menuIndex)} ----- ${widget.controller.isShow}');
     return GestureDetector(
       onTap: () {
         final RenderBox overlay =
@@ -172,9 +173,12 @@ class _DropDownHeaderState extends State<DropDownHeader>
                       item.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: _isShowDropDownItemWidget
-                          ? _dropDownStyle
-                          : widget.selectStyle.merge(item.style),
+//                      style: _isShowDropDownItemWidget
+//                          ? _dropDownStyle
+//                          : widget.selectStyle.merge(item.selectStyle)
+                      style: index == menuIndex
+                          ? item.selectStyle
+                          : item.normalStyle,
                     ),
                   ),
                   Icon(
@@ -185,7 +189,7 @@ class _DropDownHeaderState extends State<DropDownHeader>
                             Icons.arrow_drop_up,
                     color: _isShowDropDownItemWidget
                         ? _iconDropDownColor
-                        : item.style?.color ?? widget.iconColor,
+                        : item.selectStyle?.color ?? widget.iconColor,
                     size: item.iconSize ?? widget.iconSize,
                   ),
                 ],
@@ -217,14 +221,17 @@ class DropDownHeaderItem {
   final IconData iconDropDownData;
   //筛选图片大小
   final double iconSize;
-  //筛选标题样式
-  final TextStyle style;
+  //筛选标题选中样式
+  final TextStyle selectStyle;
+  //筛选标题未选中样式
+  final TextStyle normalStyle;
 
   DropDownHeaderItem(
     this.title, {
     this.iconData,
     this.iconDropDownData,
     this.iconSize,
-    this.style,
+    this.selectStyle = const TextStyle(color: Colors.red, fontSize: 14),
+    this.normalStyle = const TextStyle(color: Colors.grey, fontSize: 13),
   });
 }

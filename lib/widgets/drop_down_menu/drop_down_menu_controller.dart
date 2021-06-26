@@ -9,13 +9,13 @@ class DropdownMenuController extends ChangeNotifier {
   /// vertically.
   double dropDownMenuTop;
 
-  /// Current or last dropdown menu index, default is 0.
+  /// Current or last dropdown menu index, default is 0. 当前或最后一次点击下拉的下标，默认为0
   int menuIndex = 0;
 
   /// Whether to display a dropdown menu.
   bool isShow = false;
 
-  /// Whether to display animations when hiding dropdown menu.
+  /// Whether to display animations when hiding dropdown menu. 是否展示收缩动画
   bool isShowHideAnimation = false;
 
   /// Use to display DropdownMenu specified dropdown menu index.
