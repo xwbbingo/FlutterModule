@@ -8,6 +8,9 @@ import 'package:start_app/demo/flutter_architecture/page/guide/splash_page.dart'
 import 'package:start_app/demo/flutter_architecture/page/home/main_page.dart';
 import 'package:start_app/demo/flutter_architecture/page/login/login_page.dart';
 import 'package:start_app/demo/flutter_architecture/page/login/login_webview.dart';
+import 'package:start_app/demo/flutter_architecture/page/other/language_page.dart';
+import 'package:start_app/demo/flutter_architecture/page/other/setting_page.dart';
+import 'package:start_app/demo/flutter_architecture/page/other/theme_page.dart';
 import 'package:start_app/demo/flutter_architecture/redux/app_state.dart';
 import 'package:start_app/demo/flutter_architecture/status/status.dart';
 
@@ -62,6 +65,22 @@ var webviewHandler = Handler(
           }
         : null,
   );
+});
+
+var settingHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return SettingPage();
+//    return CanvasDemo();
+});
+
+var themeHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return ThemePage();
+});
+
+var languageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return LanguagePage();
 });
 
 //var reposDetailHandler = Handler(

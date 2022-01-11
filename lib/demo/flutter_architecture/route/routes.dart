@@ -90,21 +90,21 @@ class AppRoutes {
       transitionType: TransitionType.cupertino,
     );
 
-//    router.define(
-//      setting,
-//      handler: settingHandler,
-//      transitionType: TransitionType.cupertino,
-//    );
-//    router.define(
-//      theme,
-//      handler: themeHandler,
-//      transitionType: TransitionType.cupertino,
-//    );
-//    router.define(
-//      language,
-//      handler: languageHandler,
-//      transitionType: TransitionType.cupertino,
-//    );
+    router.define(
+      setting,
+      handler: settingHandler,
+      transitionType: TransitionType.cupertino,
+    );
+    router.define(
+      theme,
+      handler: themeHandler,
+      transitionType: TransitionType.cupertino,
+    );
+    router.define(
+      language,
+      handler: languageHandler,
+      transitionType: TransitionType.cupertino,
+    );
 //    router.define(
 //      about,
 //      handler: aboutHandler,

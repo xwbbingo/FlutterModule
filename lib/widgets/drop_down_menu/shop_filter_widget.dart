@@ -7,19 +7,19 @@ import 'drop_down_menu.dart';
 import 'drop_down_menu_controller.dart';
 
 ///商品筛选控件
-class DropDownFilterWidget extends StatefulWidget {
+class ShopFilterWidget extends StatefulWidget {
   @override
-  _DropDownFilterWidgetState createState() => _DropDownFilterWidgetState();
+  _ShopFilterWidgetState createState() => _ShopFilterWidgetState();
 }
 
-class _DropDownFilterWidgetState extends State<DropDownFilterWidget> {
+class _ShopFilterWidgetState extends State<ShopFilterWidget> {
   DropdownMenuController _dropdownMenuController = DropdownMenuController();
 
   List<String> _dropDownHeaderItems = ['综合', '销量', '价格'];
   List<SortCondition> _oneItems = [];
   List<SortCondition> _twoItems = [];
   //选中的条件
-  SortCondition _selectSort;
+  SortCondition _selectOneSort;
   GlobalKey _stackKey = GlobalKey();
 
   //方法1 查找父级最近的Scaffold对应的ScaffoldState对象
@@ -32,7 +32,7 @@ class _DropDownFilterWidgetState extends State<DropDownFilterWidget> {
     super.initState();
     _oneItems.add(SortCondition(name: '综合', isSelected: true));
     _oneItems.add(SortCondition(name: '信用', isSelected: false));
-    _selectSort = _oneItems[0];
+    _selectOneSort = _oneItems[0];
   }
 
   @override
@@ -49,29 +49,30 @@ class _DropDownFilterWidgetState extends State<DropDownFilterWidget> {
                 controller: _dropdownMenuController,
                 items: [
                   DropDownHeaderItem(_dropDownHeaderItems[0]),
-                  DropDownHeaderItem(_dropDownHeaderItems[1]),
-                  DropDownHeaderItem(_dropDownHeaderItems[2]),
+                  DropDownHeaderItem(_dropDownHeaderItems[1],
+                      isShowIcon: false),
+                  DropDownHeaderItem(_dropDownHeaderItems[2], isShowIcon: true),
                 ],
                 //点击某个item
                 onItemTap: (index) {
                   //点击事件
+                  //点击下标1或2,重置下标0的值
+                  if (index == 1 || index == 2) {
+                    //将所有置为未选中状态
+                    for (var value in _oneItems) {
+                      value.isSelected = false;
+                    }
+                    //_selectOneSort = _oneItems[0];
+                    _dropDownHeaderItems[0] = _oneItems[0].name;
+                    _dropdownMenuController.updateSelectIndex(index);
+                    setState(() {});
+                  }
                 },
                 headerHeight: 70,
 //                headerBgColor: Colors.red,
                 borderWidth: 2,
                 borderColor: Color(0xFFeeede6),
                 dividerHeight: 4,
-//                dividerColor: Color(0xFFeeede6),
-//                style: TextStyle(color: Color(0xFF666666), fontSize: 13),
-//                dropDownStyle: TextStyle(
-//                  fontSize: 13,
-//                  color: Theme
-//                      .of(context)
-//                      .primaryColor,
-//                ),
-//                iconSize: 20,
-//                iconColor: Color(0xFFafada7),
-//                iconDropDownColor: Theme.of(context).primaryColor,
               ),
               buildFoodList(),
             ],
@@ -83,12 +84,31 @@ class _DropDownFilterWidgetState extends State<DropDownFilterWidget> {
               DropdownMenuBuilder(
                   dropDownHeight: 40 * 8.0,
                   dropDownWidget: _buildConditionListWidget(_oneItems, (value) {
-                    _selectSort = value;
+                    _selectOneSort = value;
                     //头部进行重新赋值
-                    _dropDownHeaderItems[0] = _selectSort.name;
+                    _dropDownHeaderItems[0] = _selectOneSort.name;
+                    _dropdownMenuController.updateSelectIndex(0);
                     _dropdownMenuController.hide();
                     setState(() {});
                   })),
+              DropdownMenuBuilder(
+                dropDownHeight: 0,
+                dropDownWidget: Container(),
+              ),
+              DropdownMenuBuilder(
+                dropDownHeight: 0,
+                dropDownWidget: Container(),
+              ),
+//              DropdownMenuBuilder(
+//                  dropDownHeight: 40 * 8.0,
+//                  dropDownWidget: _buildConditionListWidget(_twoItems, (value) {
+//                    _selectSort = value;
+//                    //头部进行重新赋值
+//                    _dropDownHeaderItems[2] = _selectSort.name;
+//                    _dropdownMenuController.select(2);
+//                    _dropdownMenuController.hide();
+//                    setState(() {});
+//                  })),
             ],
           ),
         ],

@@ -103,7 +103,7 @@ class _DrawerPageState extends State<DrawerPage> {
                 style: YZStyle.middleText),
             leading: Icon(Icons.settings, color: Colors.grey),
             onTap: () {
-              //NavigatorUtil.goSetting(context);
+              NavigatorUtil.goSetting(context);
             },
           ),
           ListTile(

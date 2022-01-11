@@ -60,10 +60,16 @@ class _DropDownMenuState extends State<DropDownMenu>
 
   int _currentMenuIndex;
 
+//  //存储头部可展开的下标集合
+//  List<String> allIndex = <String>[];
+
   @override
   void initState() {
     super.initState();
-
+//    //将头部下标存储起来 (如0,2)
+//    for (int i = 0; i < widget.menus.length; i++) {
+//      allIndex.add(widget.menus[i].toHeaderIndex.toString());
+//    }
     widget.controller.addListener(_onController);
     _controller = new AnimationController(
         duration: Duration(milliseconds: widget.animationMilliseconds),
@@ -98,6 +104,10 @@ class _DropDownMenuState extends State<DropDownMenu>
     if (_currentMenuIndex >= widget.menus.length) {
       return;
     }
+//    //下标不包含,直接返回
+//    if (!allIndex.contains(_currentMenuIndex.toString())) {
+//      return;
+//    }
 
     _isShowDropDownItemWidget = !_isShowDropDownItemWidget;
     if (widget.dropdownMenuChanging != null) {
@@ -188,6 +198,14 @@ class _DropDownMenuState extends State<DropDownMenu>
     if (menuIndex >= widget.menus.length) {
       return Container();
     }
+    //高度为0时不需弹出
+    if (widget.menus[menuIndex].dropDownHeight == 0) {
+      return Container();
+    }
+//    //下标不包含,直接返回
+//    if (!allIndex.contains(menuIndex.toString())) {
+//      return Container();
+//    }
     //显示下拉选择控件
     return Positioned(
         top: widget.controller.dropDownMenuTop,

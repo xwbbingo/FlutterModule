@@ -66,11 +66,10 @@ class NavigatorUtil {
     );
   }
 
-//
-//  //设置页
-//  static goSetting(BuildContext context) {
-//    Application.router.navigateTo(context, AppRoutes.setting);
-//  }
+  //设置页
+  static goSetting(BuildContext context) {
+    Application.router.navigateTo(context, AppRoutes.setting);
+  }
 //
 //  //关于页
 //  static goAbout(BuildContext context) {
@@ -194,16 +193,15 @@ class NavigatorUtil {
 //        AppRoutes.edit_issue + "?title=$title&body=$body&url=$url&num=$num");
 //  }
 //
-//  //主题页
-//  static goTheme(BuildContext context) {
-//    Application.router.navigateTo(context, AppRoutes.theme);
-//  }
-//
-//  //语言切换页
-//  static goLanguage(BuildContext context) {
-//    Application.router.navigateTo(context, AppRoutes.language);
-//  }
-//
+  //主题页
+  static goTheme(BuildContext context) {
+    Application.router.navigateTo(context, AppRoutes.theme);
+  }
+
+  //语言切换页
+  static goLanguage(BuildContext context) {
+    Application.router.navigateTo(context, AppRoutes.language);
+  }
 
 //
 //  //功能介绍页

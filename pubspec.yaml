@@ -88,12 +88,14 @@ dependencies:
   # 控件库 https://github.com/flutterchina/flukit
   flukit: any
 
+  ########### 数据库 ###########
+  sqflite: any
+
   ########### 工具相关 ###########
   #吐司 https://github.com/PonnamKarthik/FlutterToast
   fluttertoast: ^8.0.7
   #markdown
   markdown: any
-
 
 
   ########### 其它相关 ###########
@@ -119,6 +121,7 @@ dependencies:
   equatable: ^2.0.2
 
   # 待了解 支付宝 ： tobias 微信 fluwx
+
 
 dev_dependencies:
   flutter_test:
@@ -181,3 +184,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true

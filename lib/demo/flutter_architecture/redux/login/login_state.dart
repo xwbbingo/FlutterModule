@@ -1,6 +1,6 @@
 import 'package:start_app/demo/flutter_architecture/status/status.dart';
 
-//reducer中的状态,变化后widget会变化
+/// 2  reducer中的状态,变化后widget会变化
 class LoginState {
   final LoadingStatus status;
   final String token;

@@ -1,9 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:start_app/net/dio_manager.dart';
 import 'package:start_app/utils/toast_util.dart';
-
-import '../net_index.dart';
 
 /// 统一接口返回格式错误检测
 class MyErrorInterceptor extends InterceptorsWrapper {
@@ -34,13 +33,13 @@ class MyErrorInterceptor extends InterceptorsWrapper {
         return response;
       } else if (errorCode == -1001 /*未登录错误码*/) {
 //        User().clearUserInfo();
-        dio.clear(); // 调用拦截器的clear()方法来清空等待队列。
+        DioManager.instance.dio.clear(); // 调用拦截器的clear()方法来清空等待队列。
 //        SPUtil.clear();
 //        goLogin();
-        return dio.reject(errorMsg); // 完成和终止请求/响应
+        return DioManager.instance.dio.reject(errorMsg); // 完成和终止请求/响应
       } else {
         ToastUtil.show(msg: errorMsg);
-        return dio.reject(errorMsg); // 完成和终止请求/响应
+        return DioManager.instance.dio.reject(errorMsg); // 完成和终止请求/响应
       }
     }
     return response;

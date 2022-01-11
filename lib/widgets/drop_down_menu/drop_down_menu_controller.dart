@@ -18,6 +18,9 @@ class DropdownMenuController extends ChangeNotifier {
   /// Whether to display animations when hiding dropdown menu. 是否展示收缩动画
   bool isShowHideAnimation = false;
 
+  //记录当前选中的下标,有下拉选择. (点击下拉却没有点击)
+  int selectIndex = 0;
+
   /// Use to display DropdownMenu specified dropdown menu index.
   void show(int index) {
     isShow = true;
@@ -30,5 +33,10 @@ class DropdownMenuController extends ChangeNotifier {
     this.isShowHideAnimation = isShowHideAnimation;
     isShow = false;
     notifyListeners();
+  }
+
+  ///更新选中的下标
+  void updateSelectIndex(int index) {
+    selectIndex = index;
   }
 }

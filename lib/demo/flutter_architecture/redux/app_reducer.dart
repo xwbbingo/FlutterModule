@@ -4,6 +4,7 @@ import 'login/login_reducer.dart';
 import 'theme_reducer.dart';
 import 'user/user_reducer.dart';
 
+/// 6 state发生变化，View需要更新
 AppState appReducer(AppState state, action) {
   return AppState(
     themeData: themeReducer(state.themeData, action),
