@@ -63,21 +63,21 @@ class UserDbProvider extends BaseDbProvider {
     // ''';
 
     //2
-    return tableBaseString(dbName, columnId) +
-        '''
-    $columnUserName text not null,
-    $columnUserAge text not null,
-    $columnUserSex text not null)
-    ''';
-
-    //3
     // return tableBaseString(dbName, columnId) +
     //     '''
     // $columnUserName text not null,
     // $columnUserAge text not null,
-    // $columnUserSex text not null,
-    // $columnUserMobile text not null)
+    // $columnUserSex text not null)
     // ''';
+
+    //3
+    return tableBaseString(dbName, columnId) +
+        '''
+    $columnUserName text not null,
+    $columnUserAge text not null,
+    $columnUserSex text not null,
+    $columnUserMobile text not null)
+    ''';
   }
 
   @override
@@ -139,25 +139,25 @@ class UserDbProvider extends BaseDbProvider {
     //更新前 2
     // return await db.insert(
     //     dbName, toMap(model.userName, model.userAge, model.userSex));
-    return await db.rawInsert(
-        "insert into $dbName ($columnId,$columnUserName,$columnUserAge,$columnUserSex) values (?,?,?,?)",
-        [
-          model.id,
-          model.userName,
-          model.userAge,
-          model.userSex,
-        ]);
-
-    //更新后 3
     // return await db.rawInsert(
-    //     "insert into $dbName ($columnId,$columnUserName,$columnUserAge,$columnUserSex,$columnUserMobile) values (?,?,?,?,?)",
+    //     "insert into $dbName ($columnId,$columnUserName,$columnUserAge,$columnUserSex) values (?,?,?,?)",
     //     [
     //       model.id,
     //       model.userName,
     //       model.userAge,
     //       model.userSex,
-    //       model.userMobile,
     //     ]);
+
+    //更新后 3
+    return await db.rawInsert(
+        "insert into $dbName ($columnId,$columnUserName,$columnUserAge,$columnUserSex,$columnUserMobile) values (?,?,?,?,?)",
+        [
+          model.id,
+          model.userName,
+          model.userAge,
+          model.userSex,
+          model.userMobile,
+        ]);
   }
 
   ///插入到数据库
@@ -182,24 +182,24 @@ class UserDbProvider extends BaseDbProvider {
     //       model.id,
     //     ]);
     //2
-    await database.rawUpdate(
-        "update $dbName set $columnUserName = ?,$columnUserAge = ?,$columnUserSex = ? where $columnId= ?",
-        [
-          model.userName,
-          model.userAge,
-          model.userSex,
-          model.id,
-        ]);
-    //3
     // await database.rawUpdate(
-    //     "update $dbName set $columnUserName = ?,$columnUserAge = ?,$columnUserSex = ?,$columnUserMobile = ? where $columnId= ?",
+    //     "update $dbName set $columnUserName = ?,$columnUserAge = ?,$columnUserSex = ? where $columnId= ?",
     //     [
     //       model.userName,
     //       model.userAge,
     //       model.userSex,
-    //       model.userMobile,
-    //       model.id
+    //       model.id,
     //     ]);
+    //3
+    await database.rawUpdate(
+        "update $dbName set $columnUserName = ?,$columnUserAge = ?,$columnUserSex = ?,$columnUserMobile = ? where $columnId= ?",
+        [
+          model.userName,
+          model.userAge,
+          model.userSex,
+          model.userMobile,
+          model.id
+        ]);
   }
 
   ///获取事件数据

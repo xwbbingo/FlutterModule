@@ -20,8 +20,6 @@ abstract class BaseDbProvider {
     ''';
   }
 
-  //新增更新字段时的方法
-
   Future<Database> getDataBase() async {
     return await open();
   }
@@ -48,15 +46,13 @@ abstract class BaseDbProvider {
       Database db = await SqlManager.getCurrentDatabase();
       while (SqlManager.nowOldVersion < SqlManager.nowNewVersion) {
         SqlManager.nowOldVersion++;
+        //获取下一版本的更新sql ,根据版本号获取不同的sql, 进行更新操作
         String updateSql = tableUpdateString(SqlManager.nowOldVersion);
         GgLogUtil.v("更新Sql=> $updateSql  / ${SqlManager.nowOldVersion}");
-        //问题:表存在,需要删除老表,将老表的数据转移至新表
         Batch batch = db.batch();
-        //根据版本号获取不同的sql, 进行更新操作
         //新增字段的sql
         // batch.execute('alter table ta_person add fire text');
         batch.execute(updateSql);
-        //更改字段的sql
         await batch.commit();
       }
     }

@@ -9,7 +9,7 @@ class UserModel {
     this.userName,
     this.userAge,
     this.userSex,
-    // this.userMobile,
+    this.userMobile,
   });
 
   UserModel.fromJson(dynamic json) {
@@ -17,14 +17,14 @@ class UserModel {
     userName = json['userName'];
     userAge = json['userAge'];
     userSex = json['userSex'];
-    // userMobile = json['userMobile'];
+    userMobile = json['userMobile'];
   }
 
   int id;
   String userName;
   String userAge;
   String userSex;
-  // String userMobile;
+  String userMobile;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -32,7 +32,7 @@ class UserModel {
     map['userName'] = userName;
     map['userAge'] = userAge;
     map['userSex'] = userSex;
-    // map['userMobile'] = userMobile;
+    map['userMobile'] = userMobile;
     return map;
   }
 }

@@ -94,12 +94,9 @@ class _DataDbPageState extends State<DataDbPage> {
         Padding(
             padding: EdgeInsets.all(5),
             child: Text("性别：${_datas[index]?.userSex}")),
-
-        // _datas[index].userMobile != null
-        //     ? Padding(
-        //         padding: EdgeInsets.all(5),
-        //         child: Text("手机：" + _datas[index].userMobile))
-        //     : Container(),
+        Padding(
+            padding: EdgeInsets.all(5),
+            child: Text("手机：${_datas[index]?.userMobile}")),
       ],
     );
   }
@@ -111,13 +108,13 @@ class _DataDbPageState extends State<DataDbPage> {
       user1.userName = "张三";
       user1.userAge = "30";
       user1.userSex = "男";
-      // user1.userMobile = "13${Random().nextInt(20)}";
+      user1.userMobile = "13${Random().nextInt(20)}";
 
       UserModel user2 = UserModel();
       user2.userName = "李四";
       user2.userAge = "32";
       user2.userSex = "女";
-      // user2.userMobile = "13${Random().nextInt(20)}";
+      user2.userMobile = "13${Random().nextInt(20)}";
 
       await dbProvider.insertUser(user1);
       await dbProvider.insertUser(user2);
@@ -131,7 +128,7 @@ class _DataDbPageState extends State<DataDbPage> {
     user.userName = "我是增加的${Random().nextInt(99)}";
     user.userAge = Random().nextInt(99).toString();
     user.userSex = Random().nextInt(2) == 0 ? "男" : "女";
-    // user.userMobile = "13${Random().nextInt(20)}";
+    user.userMobile = "13${Random().nextInt(20)}";
     await dbProvider.insertUser(user);
     _query();
   }
@@ -158,6 +155,7 @@ class _DataDbPageState extends State<DataDbPage> {
       u.userName = "我被修改了${Random().nextInt(99)}";
       u.userAge = Random().nextInt(70).toString();
       u.userSex = Random().nextInt(2) == 0 ? "男" : "女";
+      u.userMobile = "15${Random().nextInt(20)}";
       await dbProvider.updateUser(u);
       _query();
     }
