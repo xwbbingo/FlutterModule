@@ -7,7 +7,7 @@ import 'package:start_app/utils/gg_log_util.dart';
  * 数据库管理
  */
 class SqlManager {
-  static const _VERSION = 1;
+  static const _VERSION = 2;
 
   static const _DB_NAME = "start_app.db";
 

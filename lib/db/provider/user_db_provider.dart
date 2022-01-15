@@ -56,19 +56,19 @@ class UserDbProvider extends BaseDbProvider {
     //注意点：数据库更新时将新增字段（修改字段）添加。 防止用户删除app,重新安装app,数据库找不到相应字段
 
     //1
-    return tableBaseString(dbName, columnId) +
-        '''
-    $columnUserName text not null,
-    $columnUserAge text not null)
-    ''';
-
-    //2
     // return tableBaseString(dbName, columnId) +
     //     '''
     // $columnUserName text not null,
-    // $columnUserAge text not null,
-    // $columnUserSex text not null)
+    // $columnUserAge text not null)
     // ''';
+
+    //2
+    return tableBaseString(dbName, columnId) +
+        '''
+    $columnUserName text not null,
+    $columnUserAge text not null,
+    $columnUserSex text not null)
+    ''';
 
     //3
     // return tableBaseString(dbName, columnId) +
@@ -128,25 +128,25 @@ class UserDbProvider extends BaseDbProvider {
     }
     //更新前 1
     // return await db.insert(dbName, toMap(model.userName, model.userAge));
-    return await db.rawInsert(
-        "insert into $dbName ($columnId,$columnUserName,$columnUserAge) values (?,?,?)",
-        [
-          model.id,
-          model.userName,
-          model.userAge,
-        ]);
-
-    //更新前 2
-    // return await db.insert(
-    //     dbName, toMap(model.userName, model.userAge, model.userSex));
     // return await db.rawInsert(
-    //     "insert into $dbName ($columnId,$columnUserName,$columnUserAge,$columnUserSex) values (?,?,?,?)",
+    //     "insert into $dbName ($columnId,$columnUserName,$columnUserAge) values (?,?,?)",
     //     [
     //       model.id,
     //       model.userName,
     //       model.userAge,
-    //       model.userSex,
     //     ]);
+
+    //更新前 2
+    // return await db.insert(
+    //     dbName, toMap(model.userName, model.userAge, model.userSex));
+    return await db.rawInsert(
+        "insert into $dbName ($columnId,$columnUserName,$columnUserAge,$columnUserSex) values (?,?,?,?)",
+        [
+          model.id,
+          model.userName,
+          model.userAge,
+          model.userSex,
+        ]);
 
     //更新后 3
     // return await db.rawInsert(
@@ -174,22 +174,22 @@ class UserDbProvider extends BaseDbProvider {
   Future<void> updateUser(UserModel model) async {
     Database database = await getDataBase();
     //1
-    await database.rawUpdate(
-        "update $dbName set $columnUserName = ?,$columnUserAge = ? where $columnId= ?",
-        [
-          model.userName,
-          model.userAge,
-          model.id,
-        ]);
-    //2
     // await database.rawUpdate(
-    //     "update $dbName set $columnUserName = ?,$columnUserAge = ?,$columnUserSex = ? where $columnId= ?",
+    //     "update $dbName set $columnUserName = ?,$columnUserAge = ? where $columnId= ?",
     //     [
     //       model.userName,
     //       model.userAge,
-    //       model.userSex,
     //       model.id,
     //     ]);
+    //2
+    await database.rawUpdate(
+        "update $dbName set $columnUserName = ?,$columnUserAge = ?,$columnUserSex = ? where $columnId= ?",
+        [
+          model.userName,
+          model.userAge,
+          model.userSex,
+          model.id,
+        ]);
     //3
     // await database.rawUpdate(
     //     "update $dbName set $columnUserName = ?,$columnUserAge = ?,$columnUserSex = ?,$columnUserMobile = ? where $columnId= ?",

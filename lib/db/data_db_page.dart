@@ -87,13 +87,13 @@ class _DataDbPageState extends State<DataDbPage> {
             child: Text("id：" + _datas[index].id.toString())),
         Padding(
             padding: EdgeInsets.all(5),
-            child: Text("姓名：" + _datas[index].userName)),
+            child: Text("姓名：" + _datas[index]?.userName)),
         Padding(
             padding: EdgeInsets.all(5),
-            child: Text("年龄：" + _datas[index].userAge)),
-        // Padding(
-        //     padding: EdgeInsets.all(5),
-        //     child: Text("性别：" + _datas[index].userSex)),
+            child: Text("年龄：" + _datas[index]?.userAge)),
+        Padding(
+            padding: EdgeInsets.all(5),
+            child: Text("性别：${_datas[index]?.userSex}")),
 
         // _datas[index].userMobile != null
         //     ? Padding(
@@ -110,13 +110,13 @@ class _DataDbPageState extends State<DataDbPage> {
       UserModel user1 = UserModel();
       user1.userName = "张三";
       user1.userAge = "30";
-      // user1.userSex = "男";
+      user1.userSex = "男";
       // user1.userMobile = "13${Random().nextInt(20)}";
 
       UserModel user2 = UserModel();
       user2.userName = "李四";
       user2.userAge = "32";
-      // user2.userSex = "女";
+      user2.userSex = "女";
       // user2.userMobile = "13${Random().nextInt(20)}";
 
       await dbProvider.insertUser(user1);
@@ -130,7 +130,7 @@ class _DataDbPageState extends State<DataDbPage> {
     UserModel user = new UserModel();
     user.userName = "我是增加的${Random().nextInt(99)}";
     user.userAge = Random().nextInt(99).toString();
-    // user.userSex = Random().nextInt(2) == 0 ? "男" : "女";
+    user.userSex = Random().nextInt(2) == 0 ? "男" : "女";
     // user.userMobile = "13${Random().nextInt(20)}";
     await dbProvider.insertUser(user);
     _query();
@@ -157,7 +157,7 @@ class _DataDbPageState extends State<DataDbPage> {
       UserModel u = datas.first;
       u.userName = "我被修改了${Random().nextInt(99)}";
       u.userAge = Random().nextInt(70).toString();
-      // u.userSex = Random().nextInt(2) == 0 ? "男" : "女";
+      u.userSex = Random().nextInt(2) == 0 ? "男" : "女";
       await dbProvider.updateUser(u);
       _query();
     }

@@ -8,7 +8,7 @@ class UserModel {
     this.id,
     this.userName,
     this.userAge,
-    // this.userSex,
+    this.userSex,
     // this.userMobile,
   });
 
@@ -16,14 +16,14 @@ class UserModel {
     id = json['id'];
     userName = json['userName'];
     userAge = json['userAge'];
-    // userSex = json['userSex'];
+    userSex = json['userSex'];
     // userMobile = json['userMobile'];
   }
 
   int id;
   String userName;
   String userAge;
-  // String userSex;
+  String userSex;
   // String userMobile;
 
   Map<String, dynamic> toJson() {
@@ -31,7 +31,7 @@ class UserModel {
     map['id'] = id;
     map['userName'] = userName;
     map['userAge'] = userAge;
-    // map['userSex'] = userSex;
+    map['userSex'] = userSex;
     // map['userMobile'] = userMobile;
     return map;
   }
