@@ -9,7 +9,7 @@ abstract class BaseDbProvider {
 
   tableSqlString();
 
-  tableUpdateString();
+  tableUpdateString(int updateVersion);
 
   tableName();
 
@@ -29,13 +29,13 @@ abstract class BaseDbProvider {
   @mustCallSuper
   open() async {
     if (!isTableExits) {
-      await prepare(tableName(), tableSqlString(), tableUpdateString());
+      await prepare(tableName(), tableSqlString());
     }
     return await SqlManager.getCurrentDatabase();
   }
 
   @mustCallSuper
-  prepare(name, createSql, updateSql) async {
+  prepare(name, createSql) async {
     isTableExits = await SqlManager.isTableExits(name);
     GgLogUtil.v("表是否已存在=> $isTableExits");
     if (!isTableExits) {
@@ -46,18 +46,19 @@ abstract class BaseDbProvider {
     } else if (SqlManager.isTableUpdate()) {
       //更新表
       Database db = await SqlManager.getCurrentDatabase();
-      GgLogUtil.v("更新Sql=> $updateSql");
-      //问题:表存在,需要删除老表,将老表的数据转移至新表
-      Batch batch = db.batch();
-
-      //根据版本号获取不同的sql, 进行更新操作
-
-      //新增字段的sql
-      // batch.execute('alter table ta_person add fire text');
-      batch.execute(updateSql);
-      //更改字段的sql
-
-      return await batch.commit();
+      while (SqlManager.nowOldVersion < SqlManager.nowNewVersion) {
+        SqlManager.nowOldVersion++;
+        String updateSql = tableUpdateString(SqlManager.nowOldVersion);
+        GgLogUtil.v("更新Sql=> $updateSql  / ${SqlManager.nowOldVersion}");
+        //问题:表存在,需要删除老表,将老表的数据转移至新表
+        Batch batch = db.batch();
+        //根据版本号获取不同的sql, 进行更新操作
+        //新增字段的sql
+        // batch.execute('alter table ta_person add fire text');
+        batch.execute(updateSql);
+        //更改字段的sql
+        await batch.commit();
+      }
     }
   }
 }

@@ -7,13 +7,15 @@ import 'package:start_app/utils/gg_log_util.dart';
  * 数据库管理
  */
 class SqlManager {
-  static const _VERSION = 3;
+  static const _VERSION = 1;
 
   static const _DB_NAME = "start_app.db";
 
   static Database _database;
 
   static bool needUpdate = false;
+  static int nowOldVersion;
+  static int nowNewVersion;
 
   ///初始化
   static init() async {
@@ -34,6 +36,8 @@ class SqlManager {
       }, onUpgrade: (Database db, int oldVersion, int newVersion) async {
         GgLogUtil.v("更新$oldVersion / $newVersion");
         needUpdate = oldVersion < newVersion;
+        nowOldVersion = oldVersion;
+        nowNewVersion = newVersion;
       });
     }
   }

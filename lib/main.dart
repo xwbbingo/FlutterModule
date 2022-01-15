@@ -6,7 +6,7 @@ import 'demo/flutter_weather/weather_main.dart' as flutter_weather;
 import 'main/wanandroid_main.dart' as flutter_wanandroid;
 
 void main() {
-  final flavor = Architecture.architecture;
+  final flavor = Architecture.cn;
   switch (flavor) {
     case Architecture.wanandroid:
       flutter_wanandroid.main();

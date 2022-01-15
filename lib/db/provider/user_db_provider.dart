@@ -19,12 +19,19 @@ class UserDbProvider extends BaseDbProvider {
   String userAge;
   String userSex;
 
-  Map<String, dynamic> toMap(String userName, String userAge, String userSex) {
+  Map<String, dynamic> toMap(String userName, String userAge,
+      {String userSex}) {
     Map<String, dynamic> map = {
       columnUserName: userName,
       columnUserAge: userAge,
       columnUserSex: userSex
     };
+    if (userSex != null) {
+      map[columnUserSex] = userSex;
+    }
+    if (userSex != null) {
+      map[columnUserSex] = userSex;
+    }
     if (id != null) {
       map[columnId] = id;
     }
@@ -47,22 +54,43 @@ class UserDbProvider extends BaseDbProvider {
   @override
   tableSqlString() {
     //注意点：数据库更新时将新增字段（修改字段）添加。 防止用户删除app,重新安装app,数据库找不到相应字段
+
+    //1
     return tableBaseString(dbName, columnId) +
         '''
     $columnUserName text not null,
-    $columnUserAge text not null,
-    $columnUserSex text not null,
-    $columnUserMobile text not null)
+    $columnUserAge text not null)
     ''';
+
+    //2
+    // return tableBaseString(dbName, columnId) +
+    //     '''
+    // $columnUserName text not null,
+    // $columnUserAge text not null,
+    // $columnUserSex text not null)
+    // ''';
+
+    //3
+    // return tableBaseString(dbName, columnId) +
+    //     '''
+    // $columnUserName text not null,
+    // $columnUserAge text not null,
+    // $columnUserSex text not null,
+    // $columnUserMobile text not null)
+    // ''';
   }
 
   @override
-  tableUpdateString() {
+  tableUpdateString(int updateVersion) {
     //考虑点: 根据版本号来区别更新语句 （中间有过多次更新）
     // --修改字段
     // -- ALTER TABLE product CHANGE address address1 VARCHAR(20);
     //添加标志位,用于判断增加表字段或修改表字段
-    return 'alter table $dbName add $columnUserMobile text'; //不能加not null,否则会报异常, 添加需加默认值
+    if (updateVersion == 2) {
+      return 'alter table $dbName add $columnUserSex text'; //不能加not null,否则会报异常, 添加需加默认值
+    } else if (updateVersion == 3) {
+      return 'alter table $dbName add $columnUserMobile text';
+    }
   }
 
   //--------------------------写法1-------------------------------//
@@ -98,7 +126,17 @@ class UserDbProvider extends BaseDbProvider {
       ///删除数据
       await db.delete(dbName, where: "$columnId = ?", whereArgs: [model.id]);
     }
-    //更新前
+    //更新前 1
+    // return await db.insert(dbName, toMap(model.userName, model.userAge));
+    return await db.rawInsert(
+        "insert into $dbName ($columnId,$columnUserName,$columnUserAge) values (?,?,?)",
+        [
+          model.id,
+          model.userName,
+          model.userAge,
+        ]);
+
+    //更新前 2
     // return await db.insert(
     //     dbName, toMap(model.userName, model.userAge, model.userSex));
     // return await db.rawInsert(
@@ -109,16 +147,17 @@ class UserDbProvider extends BaseDbProvider {
     //       model.userAge,
     //       model.userSex,
     //     ]);
-    //更新后
-    return await db.rawInsert(
-        "insert into $dbName ($columnId,$columnUserName,$columnUserAge,$columnUserSex,$columnUserMobile) values (?,?,?,?,?)",
-        [
-          model.id,
-          model.userName,
-          model.userAge,
-          model.userSex,
-          model.userMobile,
-        ]);
+
+    //更新后 3
+    // return await db.rawInsert(
+    //     "insert into $dbName ($columnId,$columnUserName,$columnUserAge,$columnUserSex,$columnUserMobile) values (?,?,?,?,?)",
+    //     [
+    //       model.id,
+    //       model.userName,
+    //       model.userAge,
+    //       model.userSex,
+    //       model.userMobile,
+    //     ]);
   }
 
   ///插入到数据库
@@ -134,6 +173,15 @@ class UserDbProvider extends BaseDbProvider {
   ///更新数据库
   Future<void> updateUser(UserModel model) async {
     Database database = await getDataBase();
+    //1
+    await database.rawUpdate(
+        "update $dbName set $columnUserName = ?,$columnUserAge = ? where $columnId= ?",
+        [
+          model.userName,
+          model.userAge,
+          model.id,
+        ]);
+    //2
     // await database.rawUpdate(
     //     "update $dbName set $columnUserName = ?,$columnUserAge = ?,$columnUserSex = ? where $columnId= ?",
     //     [
@@ -142,15 +190,16 @@ class UserDbProvider extends BaseDbProvider {
     //       model.userSex,
     //       model.id,
     //     ]);
-    await database.rawUpdate(
-        "update $dbName set $columnUserName = ?,$columnUserAge = ?,$columnUserSex = ?,$columnUserMobile = ? where $columnId= ?",
-        [
-          model.userName,
-          model.userAge,
-          model.userSex,
-          model.userMobile,
-          model.id
-        ]);
+    //3
+    // await database.rawUpdate(
+    //     "update $dbName set $columnUserName = ?,$columnUserAge = ?,$columnUserSex = ?,$columnUserMobile = ? where $columnId= ?",
+    //     [
+    //       model.userName,
+    //       model.userAge,
+    //       model.userSex,
+    //       model.userMobile,
+    //       model.id
+    //     ]);
   }
 
   ///获取事件数据
@@ -193,7 +242,7 @@ class UserDbProvider extends BaseDbProvider {
           .delete(dbName, where: "$columnUserName = ?", whereArgs: [userName]);
     }
     //插入记录
-    return await db.insert(dbName, toMap(userName, userAge, userSex));
+    return await db.insert(dbName, toMap(userName, userAge, userSex: userSex));
   }
 
   ///删除数据
@@ -215,7 +264,7 @@ class UserDbProvider extends BaseDbProvider {
     var provider = await _getProvider(db, userName);
     if (provider != null) {
       //修改记录
-      return await db.update(dbName, toMap(userName, userAge, userSex),
+      return await db.update(dbName, toMap(userName, userAge, userSex: userSex),
           where: "$columnUserName = ?", whereArgs: [userName]);
     }
   }
