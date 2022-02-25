@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
+import 'file:///E:/FlutterProject/start_app/lib/widgets/stable/privacy_view.dart';
+
 /**
  * 持有的状态可能在widget生命周期中发生变化. 实现一个 stateful widget 至少需要两个类
  * 一个 StatefulWidget类。
@@ -39,7 +41,9 @@ class RandomWordsState extends State<RandomWords> {
         actions: <Widget>[
           new IconButton(
             icon: new Icon(Icons.list),
-            onPressed: _pushSaved,
+            onPressed: () {
+              PrivacyUtil.showPrivacyDialog(context);
+            },
           ),
         ],
       ),

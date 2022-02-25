@@ -5,23 +5,20 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:start_app/application.dart';
 import 'package:start_app/demo/flutter_architecture/localizations/app_localizations_delegate.dart';
-import 'package:start_app/demo/flutter_architecture/redux/app_reducer.dart';
 import 'package:start_app/demo/flutter_architecture/redux/app_state.dart';
-import 'package:start_app/demo/flutter_architecture/redux/user/user_middleware.dart';
+import 'package:start_app/demo/flutter_architecture/redux/redux_store.dart';
 import 'package:start_app/demo/flutter_architecture/route/routes.dart';
+import 'package:start_app/utils/sp_util.dart';
 
 import 'redux/common_action.dart';
-import 'redux/login/login_middleware.dart';
 
-void main() {
-  //初始化 redux 的配置
-  final store = new Store<AppState>(appReducer,
-      initialState: AppState.initial(),
-      middleware: [
-        LoginMiddleware(),
-        UserMiddleware(),
-      ]);
-  Application.store = store;
+void main() async {
+  /// 修改问题: Unhandled Exception: ServicesBinding.defaultBinaryMessenger was accessed before the binding was initialized
+  /// https://stackoverflow.com/questions/57689492/flutter-unhandled-exception-servicesbinding-defaultbinarymessenger-was-accesse
+  WidgetsFlutterBinding.ensureInitialized();
+  await SPUtil.getInstance();
+
+  Application.store = ReduxStore.createStore();
 
   //初始化 fluro 的配置
   final router = FluroRouter();
@@ -29,7 +26,7 @@ void main() {
   Application.router = router;
 
   runApp(GitApp(
-    store: store,
+    store: Application.store,
   ));
 }
 
@@ -60,10 +57,15 @@ class _GitAppState extends State<GitApp> {
               localizationsDelegates: [
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
                 AppLocalizationsDelegate.delegate
               ],
               locale: vm.locale,
-              supportedLocales: [vm.locale],
+              // supportedLocales: [vm.locale],
+              supportedLocales: [
+                Locale('zh', 'CH'),
+                Locale('en', 'US'),
+              ],
               theme: vm.themeData,
               onGenerateRoute: Application.router.generator,
               //home: LoginPage(),

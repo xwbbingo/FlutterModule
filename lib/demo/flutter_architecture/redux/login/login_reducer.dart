@@ -7,7 +7,7 @@ import 'login_state.dart';
 
 const String TAG = "loginReducer";
 
-//用于处理middleware里回调相关的action,即状态发生变化
+/// 5 用于处理middleware里回调相关的action,即状态发生变化
 final loginReducer = combineReducers<LoginState>([
   TypedReducer<LoginState, RequestingLoginAction>(_requestingLogin),
   TypedReducer<LoginState, ReceivedLoginAction>(_receivedLogin),

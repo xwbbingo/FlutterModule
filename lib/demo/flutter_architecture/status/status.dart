@@ -1,3 +1,4 @@
+/// 1  定义model
 enum LoadingStatus {
   idle,
   loading,
@@ -25,5 +26,3 @@ enum ReposStatus {
   inactive,
   loading,
 }
-
-

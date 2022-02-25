@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:start_app/demo/flutter_architecture/bean/user_bean.dart';
 
-//发送dispatch相关的action
+/// 3 发送dispatch相关的action
 //密码登录
 class FetchLoginAction {
   final BuildContext context;

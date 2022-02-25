@@ -1,0 +1,6 @@
+{
+  "name": "名字",
+  "age": "年龄",
+  "pageHomeWelcome": "语言 {name}",
+  "test": "{param1} , s {param2}"
+}

@@ -9,7 +9,19 @@ import 'package:start_app/utils/toast_util.dart';
 
 import 'login_action.dart';
 
-//中间件,响应dispatch发送的action,做相应的逻辑处理
+/// 4  通过Redux提供的combineReducers方法，将Action和操作方法绑定
+/**
+ * 1、combineReducers是Redux提供创建Reducer的方法。
+ * 2、combineReducers泛型一定要是我们在State中定义的类型。
+ * 3、TypedReducer是Redux提供的默认Reducer响应
+ * 4、TypedReducer的第一个泛型必须是State中定义的类型。
+ * 5、TypedReducer的第一个泛型即是我们定义的Action类型。
+ * 6、TypedReducer的形参就是我们在book_action.dart中的定义的具体操作方法。
+ * 7、dart语言中可以把方法当作参数
+ * 8、这样就把Action和方法操作绑定了。有点类似EventBus哦
+ */
+
+/// 中间件,响应dispatch发送的action,做相应的逻辑处理
 class LoginMiddleware extends MiddlewareClass<AppState> {
   static final String TAG = "LoginMiddleware";
 
