@@ -1,4 +1,4 @@
-# start_app
+# flutter_module
 
 A Start Flutter application.
 
