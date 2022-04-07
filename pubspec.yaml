@@ -44,6 +44,9 @@ dependencies:
   # https://github.com/brianegan/flutter_redux
   flutter_redux: ^0.8.2
 
+  # getx 状态管理框架 https://pub.flutter-io.cn/packages/get
+  get: ^4.6.1
+
   #  #国际化包
   #  intl: ^0.15.8
   #  #国际化工具 arb文件

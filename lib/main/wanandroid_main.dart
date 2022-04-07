@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intl/intl.dart';
 import 'package:start_app/common/common.dart';
 import 'package:start_app/generated/l10n.dart';
 import 'package:start_app/net/dio_manager.dart';
@@ -70,52 +69,52 @@ class WanAndroidAppState extends State<WanAndroidApp> {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  void _changeLanguage() async {
-    print('修改前语言环境:${Intl.getCurrentLocale()}');
-    await S.load(Locale('en', 'US'));
-    //setState刷新页面改变语言
-    setState(() {});
-    print('修改后语言环境:${Intl.getCurrentLocale()}');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    double bigFontSize = 100;
-    double smallFontSize = 16;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              S.of(context).pageHomeWelcome(Intl.getCurrentLocale()),
-            ),
-            Text(
-              S.of(context).name,
-            ),
-            //没有context时可用
-            // ModuleWidget(),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _changeLanguage,
-        tooltip: 'change to english',
-        child: Icon(Icons.refresh),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
+// class MyHomePage extends StatefulWidget {
+//   MyHomePage({Key key, this.title}) : super(key: key);
+//
+//   final String title;
+//
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+//
+// class _MyHomePageState extends State<MyHomePage> {
+//   void _changeLanguage() async {
+//     print('修改前语言环境:${Intl.getCurrentLocale()}');
+//     await S.load(Locale('en', 'US'));
+//     //setState刷新页面改变语言
+//     setState(() {});
+//     print('修改后语言环境:${Intl.getCurrentLocale()}');
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     double bigFontSize = 100;
+//     double smallFontSize = 16;
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(widget.title),
+//       ),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: <Widget>[
+//             Text(
+//               S.of(context).pageHomeWelcome(Intl.getCurrentLocale()),
+//             ),
+//             Text(
+//               S.of(context).name,
+//             ),
+//             //没有context时可用
+//             // ModuleWidget(),
+//           ],
+//         ),
+//       ),
+//       floatingActionButton: FloatingActionButton(
+//         onPressed: _changeLanguage,
+//         tooltip: 'change to english',
+//         child: Icon(Icons.refresh),
+//       ), // This trailing comma makes auto-formatting nicer for build methods.
+//     );
+//   }
+// }

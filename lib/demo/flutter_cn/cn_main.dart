@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:start_app/db/data_db_page.dart';
+import 'package:start_app/demo/flutter_cn/get/counter_easy/counter_easy_view.dart';
 import 'package:start_app/utils/gg_log_util.dart';
 
 void main() {
   GgLogUtil.init();
-  runApp(new MaterialApp(
+  runApp(new GetMaterialApp(
     title: 'My app', // used by the OS task switcher
-    home: DataDbPage(),
+    home: CounterEasyPage(),
     //home: CustomScrollViewRoute(),
   ));
 }

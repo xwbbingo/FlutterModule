@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:start_app/widgets/stable/privacy_view.dart';
 
-import 'file:///E:/FlutterProject/start_app/lib/widgets/stable/privacy_view.dart';
 
 /**
  * 持有的状态可能在widget生命周期中发生变化. 实现一个 stateful widget 至少需要两个类

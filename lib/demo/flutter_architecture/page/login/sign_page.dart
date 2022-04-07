@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:start_app/demo/flutter_architecture/common/gradient_const.dart';
 import 'package:start_app/demo/flutter_architecture/common/image_path.dart';
 import 'package:start_app/demo/flutter_architecture/commonui/common_style.dart';
+import 'package:start_app/demo/flutter_architecture/commonui/common_util.dart';
 import 'package:start_app/demo/flutter_architecture/localizations/app_localizations.dart';
 import 'package:start_app/demo/flutter_architecture/route/navigator_util.dart';
 import 'package:start_app/demo/flutter_architecture/status/status.dart';
 
-import 'file:///E:/FlutterProject/start_app/lib/demo/flutter_architecture/commonui/common_util.dart';
 
 import 'login_page.dart';
 
