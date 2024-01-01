@@ -8,10 +8,37 @@ void main() {
   GgLogUtil.init();
   runApp(new GetMaterialApp(
     title: 'My app', // used by the OS task switcher
-    home: CounterEasyPage(),
+    home: Test(),
     //home: CustomScrollViewRoute(),
   ));
 }
+
+class Test extends StatefulWidget {
+  const Test({key});
+
+  @override
+  State<Test> createState() => _TestState();
+}
+
+class _TestState extends State<Test> {
+  String text = "123";
+
+  @override
+  Widget build(BuildContext context) {
+    print("test");
+    return Column(
+      children: [
+        Text(text),
+        ElevatedButton(onPressed: (){
+          setState(() {
+            text = "456";
+          });
+        }, child: Text("789"))
+      ],
+    );
+  }
+}
+
 
 class TestFlowDelegate extends FlowDelegate {
   EdgeInsets margin = EdgeInsets.zero;
