@@ -9,6 +9,8 @@ class MyColors {
   static const Color app_main = Color(0xFF666666);
   static const Color app_bg = Color(0xfff5f5f5);
 
+  static const Color transparent = Color(0x00000000);
+
   static const Color transparent_80 = Color(0x80000000); //<!--204-->
   static const Color white_19 = Color(0X19FFFFFF);
   static const Color transparent_ba = Color(0xBA000000);
@@ -36,6 +38,12 @@ class MyColors {
   static const Color green_de = Color(0xffdedede);
 
   static const Color tag_bg = Color(0xFFF44336);
+
+  static const Color color_FFFFFF = Color(0xFFFFFFFF);
+
+  static const Color color_333333 = Color(0xFF333333);
+  static const Color color_666666 = Color(0xFF666666);
+  static const Color color_999999 = Color(0xFF999999);
 
   /// 随机获取颜色
   static Color randomColor() {
