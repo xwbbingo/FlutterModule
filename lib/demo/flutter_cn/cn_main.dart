@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:start_app/demo/flutter_cn/get/counter_easy/counter_easy_view.dart';
 import 'package:start_app/utils/gg_log_util.dart';
@@ -11,6 +12,18 @@ void main() {
     home: Test(),
     //home: CustomScrollViewRoute(),
   ));
+}
+
+class Less extends StatelessWidget {
+  Less(this.text, {Key key});
+
+  String text;
+
+  @override
+  Widget build(BuildContext context) {
+    print("less  " + text + this.toString());
+    return Text(text);
+  }
 }
 
 class Test extends StatefulWidget {
@@ -25,20 +38,22 @@ class _TestState extends State<Test> {
 
   @override
   Widget build(BuildContext context) {
-    print("test");
+    print("test  " + text);
     return Column(
       children: [
-        Text(text),
-        ElevatedButton(onPressed: (){
-          setState(() {
-            text = "456";
-          });
-        }, child: Text("789"))
+        Less(text),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              text = "456";
+            });
+          },
+          child: Text("789"),
+        )
       ],
     );
   }
 }
-
 
 class TestFlowDelegate extends FlowDelegate {
   EdgeInsets margin = EdgeInsets.zero;
@@ -235,8 +250,8 @@ class _ScrollTestState extends State<ScrollTest> {
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: SliverAppBar(
-                  title:
-                      const Text('Books'), // This is the title in the app bar.
+                  title: const Text('Books'),
+                  // This is the title in the app bar.
                   pinned: true,
                   expandedHeight: 150.0,
                   // The "forceElevated" property causes the SliverAppBar to show
@@ -339,5 +354,51 @@ class _ScrollTestState extends State<ScrollTest> {
         ),
       ),
     );
+  }
+}
+
+class ProCounterPage extends StatelessWidget {
+  const ProCounterPage({Key key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => ProCounterProvider(),
+      builder: (context, child) => _buildPage(context),
+    );
+  }
+
+  _buildPage(BuildContext context) {
+    final counter = context.read<ProCounterProvider>();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Pro Counter'),
+      ),
+      body: Center(
+          child: Consumer<ProCounterProvider>(
+            builder: (context, provider, child) {
+              return Text(
+                '点击了 ${provider.count} 次',
+                style: TextStyle(fontSize: 30.0),
+              );
+            },
+          ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          counter.increment();
+        },
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class ProCounterProvider extends ChangeNotifier {
+  int count = 0;
+
+  void increment() {
+    count++;
+    notifyListeners();
   }
 }

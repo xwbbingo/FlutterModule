@@ -19,8 +19,6 @@ Redux 提供了一个combineReducers方法，用于 Reducer 的拆分
 5.middleware 
 中间件
 
-
-
 1->发出action
 store.dispatch(action) 
 
