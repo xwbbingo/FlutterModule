@@ -18,7 +18,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=3.3.4 <4.0.0'
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
@@ -58,13 +59,13 @@ dependencies:
   #网络请求 https://github.com/dart-lang/http
   http: ^0.12.0
   #网络请求 https://github.com/flutterchina/dio
-  dio: ^3.0.10
+  dio: ^4.0.0
   #cookie管理 https://github.com/flutterchina/dio/tree/master/plugins/cookie_manager
-  dio_cookie_manager: 1.0.0
+  dio_cookie_manager: ^3.0.0
   #dio_cookie_manager需要此依赖 https://github.com/flutterchina/cookie_jar
-  cookie_jar: ^1.0.1
+  cookie_jar: ^4.0.8
   #网络连接检测
-  connectivity: ^0.3.2
+  connectivity: ^2.0.0
   #接口服务封装工具  https://github.com/trevorwang/retrofit.dart
   #retrofit: any
 
@@ -78,12 +79,10 @@ dependencies:
   ########### UI相关 ###########
   # 下拉刷新，上拉加载  https://github.com/peng8350/flutter_pulltorefresh
   pull_to_refresh: ^2.0.0
-  # 轮播图 https://github.com/best-flutter/flutter_swiper
-  flutter_swiper: ^1.1.6
   # 丰富的加载Loading样式 https://github.com/jogboms/flutter_spinkit
   flutter_spinkit: ^5.0.0
   #评价评分
-  flutter_rating_bar: ^2.0.0+2
+  flutter_rating_bar: ^4.0.0
   # 图片浏览 https://github.com/fireslime/photo_view
   photo_view: 0.11.1
   #红点 https://github.com/yako-dev/flutter_badges
